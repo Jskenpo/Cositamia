@@ -4,6 +4,8 @@ import './NavBar.css';
 import IconButton from '@mui/material/IconButton';
 import Icon from '@mui/material/Icon';
 
+import Login from '../Login/Login.js';
+
 function NavBar() {
   const [active, setActive] = useState('');
 
@@ -53,9 +55,7 @@ function NavBar() {
             </a>
           </div>
           <div id='login'>
-            <IconButton>
-              <Icon className="mdi mdi-magnify" />
-            </IconButton>
+            <Login />
           </div> 
         </div>
       </nav>

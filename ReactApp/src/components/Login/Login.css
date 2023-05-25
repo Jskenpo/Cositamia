@@ -1,0 +1,17 @@
+.modal-container{
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: white;
+    width: 360px;
+    height: 260px;
+}
+
+
+#inicioSec{
+    position: relative;
+    left: 25%;
+}
