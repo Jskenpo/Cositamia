@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './NavBar.css';
 
-import IconButton from '@mui/material/IconButton';
-import Icon from '@mui/material/Icon';
+import { Link, useLocation } from 'react-router-dom';
+
+import Login from '../Login/Login.js';
+
+import Logo from '../../assets/imas/cositamiaLogo.png'
 
 function NavBar() {
   const [active, setActive] = useState('');
@@ -12,53 +15,53 @@ function NavBar() {
   };
 
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="#">
-          Cositamía
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="true"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="navbar-collapse collapse show" id="navbarNavAltMarkup">
-          <div className="navbar-nav">
-            <a
-              className={`nav-item nav-link ${active === 'home' ? 'active' : ''}`}
-              href="#"
-              onClick={() => handleClick('home')}
-            >
-              Catalogo
-            </a>
-            <a
-              className={`nav-item nav-link ${active === 'features' ? 'active' : ''}`}
-              href="#"
-              onClick={() => handleClick('features')}
-            >
-              Acerca de nosotros
-            </a>
-            <a
-              className={`nav-item nav-link ${active === 'pricing' ? 'active' : ''}`}
-              href="#"
-              onClick={() => handleClick('pricing')}
-            >
-              Contactanos
-            </a>
+    <div id='containerNavBar'>
+      <div id='margenes'>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+          <Link className="navbar-brand" to="/">
+            <img src={Logo} alt="Logo" width="90px"/>
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="true"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="navbar-collapse collapse show" id="navbarNavAltMarkup">
+            <div className="navbar-nav">
+              <Link
+                className={`nav-item nav-link ${active === 'home' ? 'active' : ''}`}
+                to="/catalogo"
+                onClick={() => handleClick('home')}
+              >
+                Catalogo
+              </Link>
+              <Link
+                className={`nav-item nav-link ${active === 'features' ? 'active' : ''}`}
+                to="/acerca"
+                onClick={() => handleClick('features')}
+              >
+                Acerca de nosotros
+              </Link>
+              <Link
+                className={`nav-item nav-link ${active === 'pricing' ? 'active' : ''}`}
+                to="/contacto"
+                onClick={() => handleClick('pricing')}
+              >
+                Contactanos
+              </Link>
+            </div>
+            <div id='login'>
+              <Login />
+            </div> 
           </div>
-          <div id='login'>
-            <IconButton>
-              <Icon className="mdi mdi-magnify" />
-            </IconButton>
-          </div> 
-        </div>
-      </nav>
+        </nav>
+      </div>
     </div>
   );
 }
