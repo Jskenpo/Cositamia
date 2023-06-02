@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './NavBar.css';
 
-import IconButton from '@mui/material/IconButton';
-import Icon from '@mui/material/Icon';
+import { Link, useLocation } from 'react-router-dom';
 
 import Login from '../Login/Login.js';
 
@@ -17,9 +16,9 @@ function NavBar() {
     <div id='containerNavBar'>
       <div id='margenes'>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/">
             Cositamía
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -33,27 +32,27 @@ function NavBar() {
           </button>
           <div className="navbar-collapse collapse show" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <a
+              <Link
                 className={`nav-item nav-link ${active === 'home' ? 'active' : ''}`}
-                href="#"
+                to="/catalogo"
                 onClick={() => handleClick('home')}
               >
                 Catalogo
-              </a>
-              <a
+              </Link>
+              <Link
                 className={`nav-item nav-link ${active === 'features' ? 'active' : ''}`}
-                href="#"
+                to="/acerca"
                 onClick={() => handleClick('features')}
               >
                 Acerca de nosotros
-              </a>
-              <a
+              </Link>
+              <Link
                 className={`nav-item nav-link ${active === 'pricing' ? 'active' : ''}`}
-                href="#"
+                to="/contacto"
                 onClick={() => handleClick('pricing')}
               >
                 Contactanos
-              </a>
+              </Link>
             </div>
             <div id='login'>
               <Login />
