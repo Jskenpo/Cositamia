@@ -17,7 +17,7 @@ function NavBar() {
   return (
     <div id='containerNavBar'>
       <div id='margenes'>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark" id='miNavBar'>
           <Link className="navbar-brand" to="/">
             <img src={Logo} alt="Logo" width="90px"/>
           </Link>

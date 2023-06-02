@@ -1,0 +1,27 @@
+#containerAcerca{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    height: 100vh;
+    background-color: #fff;
+    margin-top: 70px;
+}
+
+.titAcerca{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    height: auto;
+    background-color: #808080;
+    border-radius: 10px;
+    margin-top: 35px;
+
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.txtAcerca{
+    width: 60%;
+    height: auto;
+    margin-top: 35px;
+}
