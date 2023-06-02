@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Button, Modal, TextField } from '@mui/material';
+import { Box, Button, Modal, TextField, IconButton } from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
 import './Login.css';
 
 const inputStyle = {
@@ -10,6 +11,11 @@ const buttonStyle = {
     margin: '10px',
     backgroundColor: '#0000000',
 };
+
+const iconLoginStyle = {
+  color: 'white',
+  fontSize: '40px',
+}
 
 const Login = () => {
   const [open, setOpen] = useState(false);
@@ -45,12 +51,12 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <Button variant="contained" onClick={handleOpen}
+    <div id='loginContainer'>
+      <IconButton variant="contained" onClick={handleOpen}
         style={buttonStyle}
       >
-        Iniciar sesión
-      </Button>
+        <PersonIcon style={iconLoginStyle}/>
+      </IconButton>
       <Modal open={open} onClose={handleClose}>
         <div className="modal-container">
           <h2 id='inicioSec'>Iniciar sesión</h2>
