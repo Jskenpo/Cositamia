@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./ReactApp/src/imas/cositamiaLogo.png" alt="Descripción de la imagen" style="width: 200px; height: auto;"/>
+    <img src="./ReactApp/src/assets/imas/cositamiaLogo.png" alt="Descripción de la imagen" style="width: 200px; height: auto;"/>
 </p>
 
 # CREACIÓN DE PÁGINA WEB DE COSITA MÍA
@@ -28,42 +28,42 @@ En la carpeta llamada Entregas SCRUM  están todas la entregas de los sprints de
 
 <ul>
     <li>
-        <img src="./ReactApp/src/imas/react.png" style= "width: 30px; height: auto;"/> React
+        <img src="./ReactApp/src/assets/imas/react.png" style= "width: 30px; height: auto;"/> React
         <br>
         Documentación 
         <br>
         https://legacy.reactjs.org/docs/getting-started.html
     </li>
     <li>
-        <img src="./ReactApp/src/imas/bootstrap.png" style= "width: 30px; height: auto;"/> Bootstrap
+        <img src="./ReactApp/src/assets/imas/bootstrap.png" style= "width: 30px; height: auto;"/> Bootstrap
         <br>
         Documentación
         <br>
         https://getbootstrap.com/docs/4.1/getting-started/introduction/
     </li>
     <li>
-        <img src="./ReactApp/src/imas/webpack.png" style= "width: 30px; height: auto;"/> Webpack
+        <img src="./ReactApp/src/assets/imas/webpack.png" style= "width: 30px; height: auto;"/> Webpack
         <br>
         Documentación
         <br>
         https://webpack.js.org/concepts/
     </li>
     <li>
-        <img src="./ReactApp/src/imas/babel.png" style= "width: 30px; height: auto;"/> Babel
+        <img src="./ReactApp/src/assets/imas/babel.png" style= "width: 30px; height: auto;"/> Babel
         <br>
         Documentación
         <br>
         https://babeljs.io/docs/usage
     </li>
     <li>
-        <img src="./ReactApp/src/imas/swiper.png" style= "width: 30px; height: auto;"/> SwiperJs
+        <img src="./ReactApp/src/assets/imas/swiper.png" style= "width: 30px; height: auto;"/> SwiperJs
         <br>
         Documentación
         <br>
         https://swiperjs.com/get-started
     </li>
     <li>
-        <img src="./ReactApp/src/imas/sass.png" style= "width: 30px; height: auto;"/> Sass, Scss
+        <img src="./ReactApp/src/assets/imas/sass.png" style= "width: 30px; height: auto;"/> Sass, Scss
         <br>
         Documentación
         <br>
