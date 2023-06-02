@@ -5,6 +5,8 @@ import { Link, useLocation } from 'react-router-dom';
 
 import Login from '../Login/Login.js';
 
+import Logo from '../../assets/imas/cositamiaLogo.png'
+
 function NavBar() {
   const [active, setActive] = useState('');
 
@@ -17,7 +19,7 @@ function NavBar() {
       <div id='margenes'>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <Link className="navbar-brand" to="/">
-            Cositamía
+            <img src={Logo} alt="Logo" width="90px"/>
           </Link>
           <button
             className="navbar-toggler"
