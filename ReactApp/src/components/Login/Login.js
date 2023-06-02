@@ -25,6 +25,19 @@ const Login = () => {
   };
 
   const handleLogin = () => {
+    fetch('http://localhost:3161/usuarios')
+        .then(response => response.json())
+        .then(apiData => {
+          apiData.forEach(user => {
+            if (username === user.usuario && password === user.contraseña) {
+              // Lógica para el login exitoso
+              console.log('Login exitoso');
+              const restauranteId = user.id_user;
+              alert('Bienvenido ' + user.usuario);
+            } else {
+              // Lógica para el login fallido
+              console.log('Login fallido');
+            }})});
     console.log('Username:', username);
     console.log('Password:', password);
 
