@@ -2,7 +2,7 @@
     position: relative;
   }
   
-  #InfoProduct {
+  .info-product {
     display: flex;
     flex-direction: column;
     align-items: center;
