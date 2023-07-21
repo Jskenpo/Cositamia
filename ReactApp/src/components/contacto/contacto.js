@@ -10,10 +10,10 @@ export default function contacto() {
             <h3>Redes sociales</h3>
         </div>
         <div className='contentContacto'>
-            <a href='https://www.facebook.com/cositamia.com.co' className='link'>
+            <a href='https://www.facebook.com/cositamia.com.co' target="_blank" rel="noopener noreferrer" className='link'>
                 <img src='https://img.icons8.com/ios-filled/50/000000/facebook.png' className='icoContacto'/>
             </a>
-            <a href='https://www.instagram.com/cositamia_gt/' className='link'>
+            <a href='https://www.instagram.com/cositamia_gt/' target="_blank" rel="noopener noreferrer" className='link'>
                 <img src='https://img.icons8.com/ios-filled/50/000000/instagram.png' className='icoContacto'/>
             </a>
         </div>
