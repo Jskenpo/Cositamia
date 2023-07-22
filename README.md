@@ -76,7 +76,7 @@ En la carpeta llamada Entregas SCRUM  están todas la entregas de los sprints de
    
    
 ## Utiliza el proyecto
-1. Clona este repositorio con el siguiente enlace : 'https://github.com/Jskenpo/Proyecto-IS.git'
+1. Clona este repositorio con el siguiente enlace : 'https://github.com/Jskenpo/Cositamia.git'
     <br>
 2. Al clonar el repositorio abre una terminal en cosola y digrígete hacia la carpeta en donde colnaste el repositorio 
     <br>
