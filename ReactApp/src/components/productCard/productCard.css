@@ -1,0 +1,60 @@
+.contenedor{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.imagen{
+    position: relative;
+    margin-left: 20%;
+    padding: 1rem;
+}
+
+.imagen img{
+    position: relative;
+    width: 100%;
+    height: 80%;
+    margin-top: 18%;
+}
+
+.accesorio-img{
+    position: relative;
+    margin-left: 5%;
+    padding: 1rem;
+}
+
+.accesorio-img img{
+    position: relative;
+    width: 100%;
+    height: 80%;
+    margin-top: 8%;
+}
+
+.informacion{
+    position: relative;
+    margin-left: 15%;
+    display: block;
+    padding: 1rem;
+}
+
+.accesorio-info{
+    position: relative;
+    margin-left: 5%;
+    display: block;
+    padding: 1rem;
+}
+
+.detalles{
+    position: relative;
+    padding: 1rem;
+    border-bottom: 2px solid black;
+    margin-top: 25%;
+}
+
+.precio{
+    padding-top: 2rem;
+}
+
+.descripcion{
+    padding-top: 2rem;
+}

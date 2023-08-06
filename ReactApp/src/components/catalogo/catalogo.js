@@ -24,21 +24,69 @@ function Catalogo() {
   };
 
   const filteredProductsVestidos = [
-    { img: producto1, nombre: 'Vestido Largo', precio: 'Q 300.00' },
-    { img: producto3, nombre: 'Vestido Cafe', precio: 'Q 500.00' },
-    { img: producto4, nombre: 'Vestido de Lona', precio: 'Q 400.00' },
-    { img: producto5, nombre: 'Pieza de vestido', precio: 'Q 700.00' },
-    { img: producto10, nombre: 'Vestido Negro', precio: 'Q 500.00' },
+    { img: producto1, nombre: 'Vestido Largo', precio: 'Q 300.00', descripcion: ["Vestido largo con estampado floral.",
+    "Mangas cortas.",
+    "Tela suave y cómoda de alta calidad.",
+    "Ideal para ocasiones formales y casuales.",
+    "Disponible en varias tallas y colores."], categoria: 'Vestidos' },
+
+    { img: producto3, nombre: 'Vestido Cafe', precio: 'Q 500.00', descripcion: ["Vestido corto color café.",
+    "Mangas cortas.",
+    "Tela suave y cómoda de alta calidad.",
+    "Ideal para ocasiones formales y casuales.",
+    "Disponible en varias tallas y colores."], categoria: 'Vestidos' },
+    
+    { img: producto4, nombre: 'Vestido de Lona', precio: 'Q 400.00', descripcion: ["Vestido corto de lona.",
+    "Mangas cortas.",
+    "Tela suave y cómoda de alta calidad.",
+    "Ideal para ocasiones formales y casuales.",
+    "Disponible en varias tallas y colores."], categoria: 'Vestidos' },
+    
+    { img: producto5, nombre: 'Pieza de vestido', precio: 'Q 700.00', descripcion: ["Pieza de vestido.",
+    "Mangas cortas.",
+    "Tela suave y cómoda de alta calidad.",
+    "Ideal para ocasiones formales y casuales.",
+    "Disponible en varias tallas y colores."], categoria: 'Vestidos' },
+    
+    { img: producto10, nombre: 'Vestido Negro', precio: 'Q 500.00', descripcion: ["Vestido largo color negro.",
+    "Mangas cortas.",
+    "Tela suave y cómoda de alta calidad.",
+    "Ideal para ocasiones formales y casuales.",
+    "Disponible en varias tallas y colores."], categoria: 'Vestidos' },
   ].filter((product) =>
     product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const filteredProductsAccesorios = [
-    { img: producto2, nombre: 'Bolso Azul', precio: 'Q 250.00' },
-    { img: producto6, nombre: 'Collar de Estrella', precio: 'Q 300.00' },
-    { img: producto7, nombre: 'Bolso Blanco', precio: 'Q 250.00' },
-    { img: producto8, nombre: 'Bolso Amarillo', precio: 'Q 250.00' },
-    { img: producto9, nombre: 'Bolso de Lona', precio: 'Q 300.00' },
+    { img: producto2, nombre: 'Bolso Azul', precio: 'Q 250.00', descripcion: ["Bolso de color azul.",
+    "Correa ajustable para llevar al hombro o cruzado.",
+    "Bolsillos internos y externos para mayor organización.",
+    "Elegante diseño para uso diario o eventos especiales.",
+    "Disponible en diferentes colores y tamaños."], categoria: 'Accesorios' },
+    
+    { img: producto6, nombre: 'Collar de Estrella', precio: 'Q 300.00', descripcion: ["Collar de estrella de oro de alta calidad.",
+    "Diseño elegante y único.",
+    "Cadena ajustable para diferentes longitudes.",
+    "Ideal para combinar con diferentes estilos.",
+    "Un accesorio llamativo para cualquier ocasión."], categoria: 'Accesorios' },
+    
+    { img: producto7, nombre: 'Bolso Blanco', precio: 'Q 250.00', descripcion: ["Bolso de color blanco.",
+    "Correa ajustable para llevar al hombro o cruzado.",
+    "Bolsillos internos y externos para mayor organización.",
+    "Elegante diseño para uso diario o eventos especiales.",
+    "Disponible en diferentes colores y tamaños."], categoria: 'Accesorios' },
+    
+    { img: producto8, nombre: 'Bolso Amarillo', precio: 'Q 250.00', descripcion: ["Bolso de color amarillo.",
+    "Correa ajustable para llevar al hombro o cruzado.",
+    "Bolsillos internos y externos para mayor organización.",
+    "Elegante diseño para uso diario o eventos especiales.",
+    "Disponible en diferentes colores y tamaños."], categoria: 'Accesorios' },
+    
+    { img: producto9, nombre: 'Bolso de Lona', precio: 'Q 300.00', descripcion: ["Bolso de lona.",
+    "Correa ajustable para llevar al hombro o cruzado.",
+    "Bolsillos internos y externos para mayor organización.",
+    "Elegante diseño para uso diario o eventos especiales.",
+    "Disponible en diferentes colores y tamaños."], categoria: 'Accesorios' },
   ].filter((product) =>
     product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -70,7 +118,7 @@ function Catalogo() {
         <div className="product-container">
           {filteredProductsVestidos.map((product, index) => (
             <div className={`product${index + 1}`} key={index}>
-              <ProductCard img={product.img} nombre={product.nombre} precio={product.precio} />
+              <ProductCard img={product.img} nombre={product.nombre} precio={product.precio} descripcion={product.descripcion} categoria={product.categoria}/>
             </div>
           ))}
         </div>
@@ -80,7 +128,7 @@ function Catalogo() {
         <div className="product-container">
           {filteredProductsAccesorios.map((product, index) => (
             <div className={`product${index + 1}`} key={index}>
-              <ProductCard img={product.img} nombre={product.nombre} precio={product.precio} />
+              <ProductCard img={product.img} nombre={product.nombre} precio={product.precio} descripcion={product.descripcion} categoria={product.categoria}/>
             </div>
           ))}
         </div>
