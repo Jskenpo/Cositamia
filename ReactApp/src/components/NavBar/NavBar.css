@@ -16,3 +16,8 @@
 #miNavBar{
     background-color: black !important;
 }
+
+#carritoButton{
+    margin-left : 320px;
+    position: relative;
+}

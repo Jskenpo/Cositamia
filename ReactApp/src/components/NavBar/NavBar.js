@@ -7,6 +7,8 @@ import Login from '../Login/Login.js';
 
 import Logo from '../../assets/imas/cositamiaLogo.png'
 
+import CarritoButton from '../carritoButton/carritoButton.js';
+
 function NavBar() {
   const [active, setActive] = useState('');
 
@@ -56,8 +58,11 @@ function NavBar() {
                 Contactanos
               </Link>
             </div>
+            <div id = 'carritoButton'>
+              <CarritoButton/>
+            </div>
             <div id='login'>
-              <Login />
+              <Login/>
             </div> 
           </div>
         </nav>
