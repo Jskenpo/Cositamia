@@ -59,10 +59,10 @@ function NavBar() {
               </Link>
             </div>
             <div id = 'carritoButton'>
-              <CarritoButton />
+              <CarritoButton/>
             </div>
             <div id='login'>
-              <Login />
+              <Login/>
             </div> 
           </div>
         </nav>

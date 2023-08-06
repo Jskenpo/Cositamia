@@ -6,7 +6,7 @@ function Carrito() {
         <div className="container">
             <div className="row">
                 <div className="col-12">
-                    <h1 className="titulo">Carrito de Compras</h1>
+                    <h1 className="titulo">Tu Carrito</h1>
                 </div>
             </div>
             <div className="row">
@@ -26,26 +26,26 @@ function Carrito() {
                             <tbody>
                                 <tr>
                                     <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                                    <td>Product Name Dada</td>
+                                    <td>Product Name 1</td>
                                     <td>In stock</td>
                                     <td><input className="form-control" type="text" value="1" /></td>
-                                    <td className="text-right">124,90 €</td>
+                                    <td className="text-right">124,90 Q</td>
                                     <td className="text-right"><button className="btn btn-sm btn-danger"><i className="fa fa-trash"></i> </button> </td>
                                 </tr>
                                 <tr>
                                     <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                                    <td>Product Name Toto</td>
+                                    <td>Product Name 2</td>
                                     <td>In stock</td>
                                     <td><input className="form-control" type="text" value="1" /></td>
-                                    <td className="text-right">33,90 €</td>
+                                    <td className="text-right">33,90 Q</td>
                                     <td className="text-right"><button className="btn btn-sm btn-danger"><i className="fa fa-trash"></i> </button> </td>
                                 </tr>
                                 <tr>
                                     <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                                    <td>Product Name Titi</td>
+                                    <td>Product Name 3</td>
                                     <td>In stock</td>
                                     <td><input className="form-control" type="text" value="1" /></td>
-                                    <td className="text-right">70,00 €</td>
+                                    <td className="text-right">70,00 Q</td>
                                     <td className="text-right"><button className="btn btn-sm btn-danger"><i className="fa fa-trash"></i> </button> </td>
                                 </tr>
                                 <tr>
@@ -53,21 +53,21 @@ function Carrito() {
                                     <td></td>
                                     <td></td>
                                     <td>Sub-Total</td>
-                                    <td className="text-right">255,90 €</td>
+                                    <td className="text-right">255,90 Q</td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td>Shipping</td>
-                                    <td className="text-right">6,90 €</td>
+                                    <td>Envío</td>
+                                    <td className="text-right">6,90 Q</td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td><strong>Total</strong></td>
-                                    <td className="text-right"><strong>346,90 €</strong></td>
+                                    <td className="text-right"><strong>346,90 Q</strong></td>
                                 </tr>
                             </tbody>
                         </table>
