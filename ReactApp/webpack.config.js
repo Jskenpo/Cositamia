@@ -6,7 +6,6 @@ const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
-
   mode: 'development',
 
   output: {
@@ -22,6 +21,7 @@ module.exports = {
       filename: '[name].css',
     }),
   ],
+
   module: {
     rules: [
       {
@@ -39,6 +39,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
+            "plugins" : ["@babel/plugin-transform-react-jsx"]
           },
         },
       },

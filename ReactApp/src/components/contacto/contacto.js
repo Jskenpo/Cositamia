@@ -4,7 +4,7 @@ import './contacto.css'
 
 export default function contacto() {
   return (
-    <div id='containerContacto'>
+    <div id='containerContacto' data-testid='containerContacto'>
         <h1>Contactos</h1>
         <div className='titContacto'>
             <h3>Redes sociales</h3>
