@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import img1 from '../../assets/imas/Carrusel_1.png'
+import img1 from '../../assets/imas/Carrusel_10.png'
 import img2 from '../../assets/imas/Carrusel_2.png'
-import img3 from '../../assets/imas/Carrusel_3.png'
+import img3 from '../../assets/imas/Carrusel_11.png'
 import './carousels.css'
 
 const movies = [

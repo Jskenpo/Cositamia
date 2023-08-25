@@ -1,7 +1,7 @@
 .SliderContainer {
     position: relative;
     width: 100%;
-    height: 600px;
+    height: 850px;
     padding: 20px 0;
     overflow-x: hidden;
     margin-top: 78px;
@@ -9,7 +9,7 @@
 
 .carousel {
     display: flex;
-    width: 89%;
+    width: 100%;
     height: 100%;
     position: relative;
     margin: auto;
@@ -28,7 +28,6 @@
     transition: 1s;
     overflow: hidden;
     vertical-align: top;
-    border: 4px solid #e4b61a;
 }
 
 .slider img {
@@ -36,8 +35,4 @@
     height: 100%;
     display: block;
     margin: 0;
-}
-
-.slider img:hover {
-    border: 4px solid white;
 }

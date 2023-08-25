@@ -10,6 +10,10 @@
     align-items: center;
 }
 
+.Carrousel{
+    margin-top: -6%;
+}
+
 .Info {
     position: relative;
     margin-left: 10%;
