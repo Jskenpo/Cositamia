@@ -1,11 +1,9 @@
 .Direccion {
-    width: 95%;
+    width: 100%;
     height: 600px;
     position: absolute;
-    left: 2.5%;
-    margin-top: 45%;
+    margin-top: 15%;
     background-color: black;
-    border-radius: 25px;
     display: flex;
     align-items: center;
 }
@@ -60,27 +58,48 @@
 }
 
 .CardContainer {
-    display: flex; 
+    display: flex;
     text-align: center;
     width: 100%; 
+    height: 600px; 
   }
   
   .Card {
-    width: 100%; 
+    position: relative;
+    width: 100%;
+    height: 100%; 
   }
   
+  .Card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
   .Description {
     position: absolute;
-    top: 0; 
-    left: 0;
-    background: rgba(0,0,0,0.5);
+    top: 55%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: white;
     padding: 10px;
     text-align: center;
     opacity: 0;
     transition: 0.3s ease;
-    left: 50%; 
-    transform: translateX(-50%); 
+    font-size: 26px;
+  }
+
+  .Card h1 {
+    position: absolute; 
+    top: 40%; 
+    left: 50%;
+    color: white;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: 0.3s ease;  
+    font-size: 65px;
+    font-style: bold;
   }
   
   .Card:hover img {
@@ -91,14 +110,39 @@
     opacity: 1;
   }
 
+  .Card:hover h1 {
+    opacity: 1;
+  }
 
 
-.Foot {
-    width: 100%;
-    height: 50px;
-    background-color: white;
+
+
+  .Muestra_Bubble {
     display: flex;
-    margin-top: 90%;
     justify-content: center;
-    align-items: center;
-}
+  }
+  
+  .Bubble {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    overflow: hidden;  
+    margin: 0 20px;
+  }
+  
+  .Bubble img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+
+
+
+
+
+
+
+
+
