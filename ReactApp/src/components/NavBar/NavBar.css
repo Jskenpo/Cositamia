@@ -1,23 +1,65 @@
-#navbarNavAltMarkup{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+#navbarNavAltMarkup {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-#containerNavBar{
-    background-color: black;
+#containerNavBar {
+  margin-top: 0px;
+  margin-left: 0;
+  margin-right: 0; /* agregado */
 }
 
-#margenes{
-    margin-left: 20px;
-    margin-right: 20px;
+#margins {
+  margin-top: 95px;
+  margin-left: 20px;
+  margin-right: 20px;
+  
+  /* Nuevo - efecto desenfoque */
+  background: rgba(255,255,255,0.3);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  border-bottom: #010101;
+}
+.logo {
+  margin: auto 0; /* agregado */
+  width: 400px; /* nuevo */
+  height: 220px; /* nuevo */ 
 }
 
-#miNavBar{
-    background-color: black !important;
+.navbar-brand {
+  position: absolute;
+  top: -15%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  background: rgba(255,255,255,0.3);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
 }
 
-#carritoButton{
-    margin-left : 320px;
-    position: relative;
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-nav:first-child {
+  padding-left: 12px;
+}
+
+.navbar-transparent {
+  background-color: transparent;
+  background: rgba(255,255,255,0.3);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+}
+
+.nav-link {
+  color: #010101 !important;
+  font-family: sans-serif;
+}
+
+.vertical-line {
+  margin: 0 auto;
+  width: 15px;
 }

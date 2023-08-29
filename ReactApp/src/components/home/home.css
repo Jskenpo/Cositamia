@@ -10,6 +10,10 @@
     align-items: center;
 }
 
+.Carrousel{
+    margin-top: -6%;
+}
+
 .Info {
     position: relative;
     margin-left: 10%;
@@ -43,18 +47,6 @@
     border-radius: 25px;
 }
 
-.Muestra_Cat {
-    width: 100%;
-    height: auto; /* Elimina la altura fija para que se ajuste al contenido */
-    position: absolute;
-    border-radius: 25px;
-    margin-top: 4%;
-    display: flex;
-    flex-direction: column; /* Cambia a flex-direction: column para que el ProductTitle esté arriba */
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px; /* Agrega un espacio interno para separar el contenido de los bordes */
-}
 
 .ProductTitle {
     margin-bottom: 20px;
@@ -67,36 +59,39 @@
     color: #e4b61a;
 }
 
-.Card {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Centra las cartas horizontalmente */
-}
-
-.ProductCard {
-    width: 280px; /* Reduzco el ancho para hacer las cartas más pequeñas */
-    height: 350px; /* Reduzco la altura para mantener la proporción */
-    margin: 25px; /* Ajusta el margen entre las cartas */
-    padding: 12px;
-    border: 1px solid #e4b61a;
-    border-radius: 5px;
+.CardContainer {
+    display: flex; 
     text-align: center;
-    box-sizing: border-box; /* Asegura que el ancho incluya el padding y el borde */
-}
+    width: 100%; 
+  }
+  
+  .Card {
+    width: 100%; 
+  }
+  
+  .Description {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    opacity: 0;
+    transition: 0.3s ease;
+    left: 50%; 
+    transform: translateX(-50%); 
+  }
+  
+  .Card:hover img {
+    filter: blur(3px);
+  }
+  
+  .Card:hover .Description {
+    opacity: 1;
+  }
 
-.ProductCard img {
-    width: 100%;
-    height: 300px; /* Reduzco la altura de la imagen */
-    object-fit: cover; /* Ajusta la imagen para llenar el espacio sin deformarla */
-    border-radius: 5px;
-}
 
-.ProductCard p {
-    margin-top: 12px;
-    font-size: 15px;
-    font-weight: 400;
-}
 
 .Foot {
     width: 100%;
