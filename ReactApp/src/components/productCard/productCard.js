@@ -14,10 +14,11 @@ const ProductCard = (props) => {
   const [selectedOption, setSelectedOption] = useState('Cantidad');
   const { descripcion } = props;
 
-  function handleShow(breakpoint) {
+  const handleShow = (breakpoint, product) => {
+    console.log("Mostrando detalles de producto:", product);
     setFullscreen(breakpoint);
     setShow(true);
-  }
+  };
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -51,7 +52,12 @@ const ProductCard = (props) => {
         </ListGroup>
         <Card.Body>
           {values.map((v, idx) => (
-            <Button style={{ backgroundColor: '#B2B6BD', borderColor: '#B2B6BD' }} key={idx} className="me-2 mb-2" onClick={() => handleShow(v)}>
+            <Button
+              style={{ backgroundColor: '#B2B6BD', borderColor: '#B2B6BD' }}
+              key={idx}
+              className="me-2 mb-2"
+              onClick={() => handleShow(v, props)} // Pasa el producto y las props
+            >
               Más detalles
               {typeof v === 'string' && `below ${v.split('-')[0]}`}
             </Button>
@@ -63,8 +69,8 @@ const ProductCard = (props) => {
             <Modal.Body>
               <div className='contenedor'>
                 <div className={`imagen ${props.categoria === 'Accesorios' ? 'accesorio-img' : ''}`}>
-                <img src={props.img} alt="Productos" />
-              </div>
+                  <img src={props.img} alt="Productos" />
+                </div>
                 <div className={`informacion ${props.categoria === 'Accesorios' ? 'accesorio-info' : ''}`}>
                   <div className='detalles'>
                     <h1>Detalles del artículo</h1>
@@ -84,16 +90,33 @@ const ProductCard = (props) => {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Form.Select aria-label="Default select example" style={{width: '120px'}} value={selectedOption} onChange={handleSelectChange}>
+              <Form.Select aria-label="Default select example" style={{ width: '120px' }} value={selectedOption} onChange={handleSelectChange}>
                 <option>Cantidad</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
               </Form.Select>
 
-              <Button variant="primary" style={{ backgroundColor: '#B2B6BD', borderColor: '#B2B6BD' }} onClick={() => setShow(false)} disabled={selectedOption === 'Cantidad'}>
+              <Button
+                variant="primary"
+                style={{ backgroundColor: '#B2B6BD', borderColor: '#B2B6BD' }}
+                onClick={() => {
+                  props.addToCart({
+                    img: props.img,
+                    nombre: props.nombre,
+                    precio: props.precio,
+                    descripcion: props.descripcion,
+                    categoria: props.categoria,
+                    cantidad: selectedOption
+                  });
+                  setShow(false);
+                }}
+                disabled={selectedOption === 'Cantidad'}
+              >
                 Agregar al carrito
               </Button>
+
+
             </Modal.Footer>
           </Modal>
         </Card.Body>

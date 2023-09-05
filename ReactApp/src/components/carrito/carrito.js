@@ -1,7 +1,24 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import './carrito.css';
 
-function Carrito() {
+function Carrito({ cart }) {
+    const navigate = useNavigate();
+
+    console.log("Productos en el carrito:", cart);
+    const calculateCosts = () => {
+        const subtotal = cart.reduce((total, item) => total + (item.precio * item.cantidad), 0);
+        const shipping = 6.90; // Ajusta esto según tu lógica de envío
+        const total = subtotal + shipping;
+
+        return { subtotal, shipping, total };
+    };
+    const { subtotal, shipping, total } = calculateCosts();
+
+    const handleClickCatalogo = () => {
+        navigate('/catalogo');
+    };
+
     return (
         <div className="container">
             <div className="row">
@@ -24,50 +41,40 @@ function Carrito() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                                    <td>Product Name 1</td>
-                                    <td>In stock</td>
-                                    <td><input className="form-control" type="text" value="1" /></td>
-                                    <td className="text-right">124,90 Q</td>
-                                    <td className="text-right"><button className="btn btn-sm btn-danger"><i className="fa fa-trash"></i> </button> </td>
-                                </tr>
-                                <tr>
-                                    <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                                    <td>Product Name 2</td>
-                                    <td>In stock</td>
-                                    <td><input className="form-control" type="text" value="1" /></td>
-                                    <td className="text-right">33,90 Q</td>
-                                    <td className="text-right"><button className="btn btn-sm btn-danger"><i className="fa fa-trash"></i> </button> </td>
-                                </tr>
-                                <tr>
-                                    <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                                    <td>Product Name 3</td>
-                                    <td>In stock</td>
-                                    <td><input className="form-control" type="text" value="1" /></td>
-                                    <td className="text-right">70,00 Q</td>
-                                    <td className="text-right"><button className="btn btn-sm btn-danger"><i className="fa fa-trash"></i> </button> </td>
-                                </tr>
+                                {cart.map((item, index) => (
+                                    <tr key={index}>
+                                        <td><img src={item.img} alt={item.nombre} style={{width: 'auto', height: '100px'}}/></td>
+                                        <td>{item.nombre}</td>
+                                        <td>In stock</td>
+                                        <td><input className="form-control" type="text" value={item.cantidad} /></td>
+                                        <td className="text-right">{(item.precio * item.cantidad).toFixed(2)} Q</td>
+                                        <td className="text-right">
+                                            <button className="btn btn-sm btn-danger">
+                                                <i className="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td>Sub-Total</td>
-                                    <td className="text-right">255,90 Q</td>
+                                    <td className="text-right">{subtotal.toFixed(2)} Q</td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td>Envío</td>
-                                    <td className="text-right">6,90 Q</td>
+                                    <td className="text-right">{shipping.toFixed(2)} Q</td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td><strong>Total</strong></td>
-                                    <td className="text-right"><strong>346,90 Q</strong></td>
+                                    <td className="text-right"><strong>{total.toFixed(2)} Q</strong></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -75,8 +82,8 @@ function Carrito() {
                 </div>
                 <div className="col mb-2">
                     <div className="row">
-                        <div className="col-sm-12  col-md-6">
-                            <button className="btn btn-block btn-light">Continuar Comprando</button>
+                        <div className="col-sm-12 col-md-6">
+                            <button className="btn btn-block btn-light" onClick={handleClickCatalogo}>Continuar Comprando</button>
                         </div>
                         <div className="col-sm-12 col-md-6 text-right">
                             <button className="btn btn-lg btn-block btn-success text-uppercase">Pagar</button>
