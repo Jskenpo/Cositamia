@@ -7,8 +7,8 @@ function Carrito({ cart }) {
 
     console.log("Productos en el carrito:", cart);
     const calculateCosts = () => {
-        const subtotal = cart.reduce((total, item) => total + (item.precio * item.cantidad), 0);
-        const shipping = 6.90; // Ajusta esto según tu lógica de envío
+        const subtotal = cart.reduce((total, item) => total + (parseFloat(item.precio) * item.cantidad), 0);
+        const shipping = 100.00;
         const total = subtotal + shipping;
 
         return { subtotal, shipping, total };
@@ -43,11 +43,13 @@ function Carrito({ cart }) {
                             <tbody>
                                 {cart.map((item, index) => (
                                     <tr key={index}>
-                                        <td><img src={item.img} alt={item.nombre} style={{width: 'auto', height: '100px'}}/></td>
+                                        <td><img src={item.img} alt={item.nombre} style={{ width: 'auto', height: '100px' }} /></td>
                                         <td>{item.nombre}</td>
                                         <td>In stock</td>
                                         <td><input className="form-control" type="text" value={item.cantidad} /></td>
-                                        <td className="text-right">{(item.precio * item.cantidad).toFixed(2)} Q</td>
+                                        <td className="text-right">
+                                            {isNaN(parseFloat(item.precio)) ? 'Precio no válido' : (parseFloat(item.precio) * item.cantidad).toFixed(2)} Q
+                                        </td>
                                         <td className="text-right">
                                             <button className="btn btn-sm btn-danger">
                                                 <i className="fa fa-trash"></i>
@@ -55,6 +57,7 @@ function Carrito({ cart }) {
                                         </td>
                                     </tr>
                                 ))}
+
                                 <tr>
                                     <td></td>
                                     <td></td>

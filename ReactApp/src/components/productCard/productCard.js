@@ -104,7 +104,7 @@ const ProductCard = (props) => {
                   props.addToCart({
                     img: props.img,
                     nombre: props.nombre,
-                    precio: props.precio,
+                    precio: parseFloat(props.precio.replace('Q', '').trim()), // Convierte la cadena en un número
                     descripcion: props.descripcion,
                     categoria: props.categoria,
                     cantidad: selectedOption
