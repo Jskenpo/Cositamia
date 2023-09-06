@@ -5,6 +5,11 @@ import './carrito.css';
 function Carrito({ cart }) {
     const navigate = useNavigate();
 
+    const handleRemoveProduct = (index) => {
+        const updatedCart = [...cart];
+        updatedCart.splice(index, 1); // Elimina el producto del carrito
+    };
+
     console.log("Productos en el carrito:", cart);
     const calculateCosts = () => {
         const subtotal = cart.reduce((total, item) => total + (parseFloat(item.precio) * item.cantidad), 0);
@@ -51,7 +56,7 @@ function Carrito({ cart }) {
                                             {isNaN(parseFloat(item.precio)) ? 'Precio no válido' : (parseFloat(item.precio) * item.cantidad).toFixed(2)} Q
                                         </td>
                                         <td className="text-right">
-                                            <button className="btn btn-sm btn-danger">
+                                            <button className="btn btn-sm btn-danger" onClick={() => handleRemoveProduct(index)}>
                                                 <i className="fa fa-trash"></i>
                                             </button>
                                         </td>
