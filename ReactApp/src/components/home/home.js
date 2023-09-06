@@ -1,5 +1,6 @@
 import React from 'react'
 import './home.css'
+import Mapa from '../Location/location.js'
 import imag_Loct from '../../assets/imas/Loc.JPG'
 import Carousel_1 from '../Carousels/carousels.js'
 import producto1 from '../../assets/imas/Producto9.jpg';
@@ -60,7 +61,7 @@ export default function home() {
 
       <div className='Direccion'>
         <div className='ImageContainer'>
-            <img src={imag_Loct}/>
+            <Mapa />
         </div>
         <div className='Info'>
           <h1>¡Visítanos!</h1>
