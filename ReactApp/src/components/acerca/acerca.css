@@ -4,24 +4,62 @@
     align-items: center; 
     height: 100vh;
     background-color: #fff;
-    margin-top: 70px;
+    margin-top: 20px;
 }
 
-.titAcerca{
+#video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#logo{
+    position: absolute;
+    top: 190px;
+    left: 50px;
+    width: 25%;
+}
+
+#somostxt{
+    text-align: justify;
+    font-size: large;
+}
+
+#Mision{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 75%;
-    height: auto;
-    background-color: #808080;
-    border-radius: 10px;
-    margin-top: 35px;
-
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    flex-direction: row;
 }
 
-.txtAcerca{
+#Mision img{
     width: 60%;
-    height: auto;
-    margin-top: 35px;
+    object-fit: cover;
+}
+
+.contentAcerca{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.txtContent{
+    width: 75%;
+}
+
+#Mision h1{
+    font-family: sans-serif;
+}
+
+#Mision p{
+    font-family: sans-serif;
+    text-align: justify;
+}
+
+#logo h1{
+    font-family: sans-serif;
+}
+
+#logo p{
+    font-family: sans-serif;
+    text-align: justify;
 }
