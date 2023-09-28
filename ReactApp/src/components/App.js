@@ -22,7 +22,7 @@ function App() {
         <Route path="/catalogo" element={<Catalogo addToCart={addToCart} />} />
         <Route path="/acerca" element={<Acerca />} />
         <Route path="/contacto" element={<Contacto />} />
-        <Route path="/carrito" element={<Carrito cart={cart} />} />
+        <Route path="/carrito" element={<Carrito cart={cart} setCart={setCart} />} />
       </Routes>
     </div>
   );

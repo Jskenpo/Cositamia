@@ -2,13 +2,14 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import './carrito.css';
 
-function Carrito({ cart }) {
+function Carrito({ cart, setCart }) {
     const navigate = useNavigate();
 
     const handleRemoveProduct = (index) => {
         const updatedCart = [...cart];
-        updatedCart.splice(index, 1); // Elimina el producto del carrito
-    };
+        updatedCart.splice(index, 1);
+        setCart(updatedCart); // Actualiza el estado del carrito
+    };    
 
     console.log("Productos en el carrito:", cart);
     const calculateCosts = () => {
