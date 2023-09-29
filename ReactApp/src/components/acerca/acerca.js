@@ -2,7 +2,7 @@ import React from 'react'
 import ReactPlayer from 'react-player'
 
 import Video from '../../assets/videos/acerca.mp4'
-import Mision from '../../assets/imas/ropa.png'
+import Mision from '../../assets/imas/ropa.jpg'
 import Vision from '../../assets/imas/ropa1.jpg'
 
 import './acerca.css'
@@ -47,10 +47,3 @@ export default function acerca() {
     </div>
   )
 }
-/*
-<img
-            id="logo"
-            src={Logo}
-            />
-
-*/
