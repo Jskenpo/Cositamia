@@ -46,14 +46,12 @@ const ProductCard = (props) => {
         <Card.Img variant="top" src={props.img} alt="Productos" />
         <Card.Body>
           <Card.Title>{props.nombre}</Card.Title>
-        </Card.Body>
-        <ListGroup className="list-group-flush">
           <ListGroup.Item>{props.precio}</ListGroup.Item>
-        </ListGroup>
+        </Card.Body>
         <Card.Body>
           {values.map((v, idx) => (
             <Button
-              style={{ backgroundColor: '#B2B6BD', borderColor: '#B2B6BD' }}
+              style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}
               key={idx}
               className="me-2 mb-2"
               onClick={() => handleShow(v, props)} // Pasa el producto y las props
@@ -64,7 +62,7 @@ const ProductCard = (props) => {
           ))}
           <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
             <Modal.Header closeButton>
-              <h1>{props.nombre}</h1>
+              <h1 style={{color: "#C23532"}}>Detalles del artículo</h1>
             </Modal.Header>
             <Modal.Body>
               <div className='contenedor'>
@@ -73,10 +71,10 @@ const ProductCard = (props) => {
                 </div>
                 <div className={`informacion ${props.categoria === 'Accesorios' ? 'accesorio-info' : ''}`}>
                   <div className='detalles'>
-                    <h1>Detalles del artículo</h1>
+                    <h1 style={{color: "#C23532"}}>{props.nombre}</h1>
                   </div>
                   <div className='precio'>
-                    <h2>{props.precio}</h2>
+                    <h2 style={{color: "#E5948F"}}>{props.precio}</h2>
                   </div>
                   <div className='descripcion'>
                     <h5>Descripción</h5>
@@ -95,11 +93,13 @@ const ProductCard = (props) => {
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
               </Form.Select>
 
               <Button
                 variant="primary"
-                style={{ backgroundColor: '#B2B6BD', borderColor: '#B2B6BD' }}
+                style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}
                 onClick={() => {
                   props.addToCart({
                     img: props.img,

@@ -59,6 +59,12 @@
   text-align: center;
 }
 
+.filtros button{
+  background-color: transparent;
+  border: none;
+  width: 100%;
+}
+
 .iconoF {
   order: -1;
   margin-right: 5px;
@@ -75,9 +81,27 @@
   top: 3rem;
 }
 
+.Nombre {
+  position: relative;
+  top: 3rem;
+}
+
 .product-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 1rem;
+}
+
+.container h1{
+  text-align: center;
+  color: #C23532;
+}
+
+.filters-container h2{
+  color: #C23532;
+}
+
+.product-container{
+  margin-top: 2rem;
 }

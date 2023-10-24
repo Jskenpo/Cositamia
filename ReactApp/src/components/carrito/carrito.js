@@ -39,7 +39,7 @@ function Carrito({ cart, setCart }) {
         <div className="container">
             <div className="row">
                 <div className="col-12">
-                    <h1 className="titulo">Tu Carrito</h1>
+                    <h1 className="titulo" style={{color: "#C23532"}}>Tu Carrito</h1>
                 </div>
             </div>
             <div className="row">
@@ -102,10 +102,10 @@ function Carrito({ cart, setCart }) {
                 <div className="col mb-2">
                     <div className="row">
                         <div className="col-sm-12 col-md-6">
-                            <button className="btn btn-block btn-light" onClick={handleClickCatalogo}>Continuar Comprando</button>
+                            <button className="btn btn-block btn-light" onClick={handleClickCatalogo} style={{backgroundColor: '#E5948F', borderColor: '#E5948F', color: "#ffffff"}}>Continuar Comprando</button>
                         </div>
                         <div className="col-sm-12 col-md-6 text-right">
-                            <button className="btn btn-lg btn-block btn-success text-uppercase" onClick={handleShow}>Pagar</button>
+                            <button className="btn btn-lg btn-block btn-success text-uppercase" onClick={handleShow} style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}>Realizar pedido</button>
 
                             <Modal show={show} onHide={handleClose} animation={false}>
                                 <Modal.Header closeButton>
@@ -209,10 +209,10 @@ function Carrito({ cart, setCart }) {
                                     </Form>
                                 </Modal.Body>
                                 <Modal.Footer>
-                                    <Button variant="secondary" onClick={handleClose} style={{ backgroundColor: '#B2B6BD', borderColor: '#B2B6BD' }}>
+                                    <Button variant="secondary" onClick={handleClose} style={{ backgroundColor: '#E5948F', borderColor: '#E5948F' }}>
                                         Cancelar
                                     </Button>
-                                    <Button variant="primary" onClick={handleClose} style={{ backgroundColor: '#198754', borderColor: '#198754' }}>
+                                    <Button variant="primary" onClick={handleClose} style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}>
                                         Realizar pago
                                     </Button>
                                 </Modal.Footer>

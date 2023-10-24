@@ -18,16 +18,29 @@ import producto10 from '../../assets/imas/Producto10.jpg';
 
 function Catalogo({ addToCart }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
+  const [showCategories, setShowCategories] = useState({ Vestidos: true, Accesorios: true }); // Estado para controlar la visibilidad de categorías
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
-  
+
   const handleShow = (breakpoint, product) => {
     addToCart(product); // Utiliza addToCart en lugar de setCart
     setFullscreen(breakpoint);
     setShow(true);
     setSelectedProduct(product); // Actualiza el producto seleccionado
+  };
+
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+  };
+
+  const toggleCategory = (category) => {
+    setShowCategories((prevCategories) => ({
+      ...prevCategories,
+      [category]: !prevCategories[category],
+    }));
   };
 
   const filteredProductsVestidos = [
@@ -137,15 +150,38 @@ function Catalogo({ addToCart }) {
           />
         </div>
         <div className="filtros">
-          Filtros
-          <div className="iconoF">
-            <FontAwesomeIcon icon={faFilter} />
-          </div>
+          <button onClick={toggleFilters}><FontAwesomeIcon icon={faFilter} />Filtros</button>
         </div>
       </div>
 
+      {showFilters && (
+        <div className="filters-container">
+          <h2 style={{marginTop:'1rem'}}>Categorías</h2>
+          <label>
+            <input
+              type="checkbox"
+              checked={showCategories.Vestidos}
+              onChange={() => toggleCategory('Vestidos')}
+            />
+            Vestidos
+          </label>
+          <br></br>
+          <label>
+            <input
+              type="checkbox"
+              checked={showCategories.Accesorios}
+              onChange={() => toggleCategory('Accesorios')}
+            />
+            Accesorios
+          </label>
+        </div>
+      )}
+
       <div className="Vestidos">
-        <h1>Vestidos</h1>
+        {showCategories.Vestidos && (
+          <h1>Vestidos</h1>
+        )}
+        {showCategories.Vestidos && ( // Muestra los productos si la categoría está activa}
         <div className="product-container">
           {filteredProductsVestidos.map((product, index) => (
             <div className={`product${index + 1}`} key={index}>
@@ -160,11 +196,15 @@ function Catalogo({ addToCart }) {
               />
             </div>
           ))}
-
         </div>
+        )}
       </div>
+
       <div className="Accesorios">
-        <h1>Accesorios</h1>
+        {showCategories.Accesorios && (
+          <h1>Accesorios</h1>
+        )}
+        {showCategories.Accesorios && ( // Muestra los productos si la categoría está activa}
         <div className="product-container">
           {filteredProductsAccesorios.map((product, index) => (
             <div className={`product${index + 1}`} key={index}>
@@ -180,6 +220,7 @@ function Catalogo({ addToCart }) {
             </div>
           ))}
         </div>
+        )}
       </div>
     </div>
   );
