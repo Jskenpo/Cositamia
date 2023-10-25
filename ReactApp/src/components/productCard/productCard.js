@@ -7,26 +7,35 @@ import Form from 'react-bootstrap/Form';
 import './productCard.css';
 
 const ProductCard = (props) => {
+  // Estado para controlar si el mouse está sobre la tarjeta
   const [isHovered, setIsHovered] = useState(false);
+
+  // Valores para controlar la presentación de la modal
   const values = [true];
   const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
+
+  // Opción seleccionada en el formulario
   const [selectedOption, setSelectedOption] = useState('Cantidad');
 
+  // Función para mostrar la modal
   const handleShow = (breakpoint, product) => {
     console.log("Mostrando detalles de producto:", product);
     setFullscreen(breakpoint);
     setShow(true);
   };
 
+  // Función para manejar el evento "mouseEnter" (cuando el mouse entra en la tarjeta)
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
 
+  // Función para manejar el evento "mouseLeave" (cuando el mouse sale de la tarjeta)
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
 
+  // Función para manejar el cambio en el formulario de selección
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -53,7 +62,7 @@ const ProductCard = (props) => {
               style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}
               key={idx}
               className="me-2 mb-2"
-              onClick={() => handleShow(v, props)} // Pasa el producto y las props
+              onClick={() => handleShow(v, props)} // Abre la modal y pasa los detalles del producto
             >
               Más detalles
               {typeof v === 'string' && `below ${v.split('-')[0]}`}
@@ -61,7 +70,7 @@ const ProductCard = (props) => {
           ))}
           <Modal show={show} size="lg" onHide={() => setShow(false)}>
             <Modal.Header closeButton>
-              <h1 style={{color: "#C23532"}}>Detalles del artículo</h1>
+              <h1 style={{ color: "#C23532" }}>Detalles del artículo</h1>
             </Modal.Header>
             <Modal.Body>
               <div className='contenedor'>
@@ -70,10 +79,10 @@ const ProductCard = (props) => {
                 </div>
                 <div className={`informacion ${props.categoria === 'Accesorios' ? 'accesorio-info' : ''}`}>
                   <div className='detalles'>
-                    <h1 style={{color: "#C23532"}}>{props.nombre}</h1>
+                    <h1 style={{ color: "#C23532" }}>{props.nombre}</h1>
                   </div>
                   <div className='precio'>
-                    <h2 style={{color: "#C23532"}}>{props.precio}</h2>
+                    <h2 style={{ color: "#C23532" }}>{props.precio}</h2>
                   </div>
                 </div>
               </div>
@@ -105,8 +114,6 @@ const ProductCard = (props) => {
               >
                 Agregar al carrito
               </Button>
-
-
             </Modal.Footer>
           </Modal>
         </Card.Body>
