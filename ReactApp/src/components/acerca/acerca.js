@@ -1,49 +1,50 @@
 import React from 'react'
 import ReactPlayer from 'react-player'
 
-import Video from '../../assets/videos/acerca.mp4'
-import Mision from '../../assets/imas/ropa.jpg'
-import Vision from '../../assets/imas/ropa1.jpg'
+import tit from '../../assets/imas/tit_img_acerc.jpeg'
+import whats from '../../assets/imas/whats_ico.jpg'
+import insta from '../../assets/imas/insta_ico.png'
+import face from '../../assets/imas/face_ico.png'
 
 import './acerca.css'
 
+/*
+Funcion react
+
+Esta funcion estructura el contactanos
+*/
 export default function acerca() {
   return (
     <div id="containerAcerca">
-        <video
-            id="video"
-            src={Video}
-            autoPlay
-            loop
-            muted
-        />
+        <div id='img_acrc'>
+            <img id='img_tit' src={tit} />
+        </div>
+
+        <h1 id='titulo'>
+            Contactanos
+        </h1>
+
+        <div id='container_content'>
+            <div id = 'tel'>
+                <h3>Escribenos en: </h3>
+                <a href='https://api.whatsapp.com/send/?phone=50242128000&text&type=phone_number&app_absent=0'>
+                    <img src={whats}/>
+                </a>
+            </div>
+            <div id='insta'>
+                <h3>Siguenos en Instragram</h3>
+                <a href=''>
+                    <img src={insta}/>
+                </a>
+            </div>
+            <div id='face'>
+                <h3>Siguenos en Facebook </h3>
+                <a href=''>
+                    <img src={face}/>
+                </a>
+            </div>
+        </div>
         
-        <div id='logo'>
-            <h1>¿Quienes somos?</h1>
-            <p id='somostxt'>
-                En nuestro corazón, somos una empresa dedicada a realzar la belleza y el cuidado personal. Nuestro enfoque es proporcionar productos de alta calidad que te hagan sentir único. Estamos comprometidos en ofrecerte una experiencia satisfactoria y duradera en cada compra.
-            </p>
-        </div>
-        <div id='Mision'>
-            <div className='contentAcerca'>
-                <h1>Misión</h1>
-                <p className='txtContent'>
-                    Ofrecer productos de alta calidad que realcen la belleza y el cuidado personal de nuestros clientes, brindando una experiencia satisfactoria y duradera en cada compra.
-                </p>
-            </div>
-            <img id='imgMision' src={Mision}/>
-            
-        </div>
-        <div id='Mision'>
-            <img id='imgVision' src={Vision}/>
-            <div className='contentAcerca'>
-                <h1>Visión</h1>
-                <p className='txtContent'>
-                    Ser una empresa líder en el mercado de la belleza y el cuidado personal, reconocida por la calidad de sus productos y la satisfacción de sus clientes.
-                </p>
-            </div>
-            
-        </div>
     </div>
   )
 }
