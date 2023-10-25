@@ -12,7 +12,6 @@ const ProductCard = (props) => {
   const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
   const [selectedOption, setSelectedOption] = useState('Cantidad');
-  const { descripcion } = props;
 
   const handleShow = (breakpoint, product) => {
     console.log("Mostrando detalles de producto:", product);
@@ -60,7 +59,7 @@ const ProductCard = (props) => {
               {typeof v === 'string' && `below ${v.split('-')[0]}`}
             </Button>
           ))}
-          <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+          <Modal show={show} size="lg" onHide={() => setShow(false)}>
             <Modal.Header closeButton>
               <h1 style={{color: "#C23532"}}>Detalles del artículo</h1>
             </Modal.Header>
@@ -74,15 +73,7 @@ const ProductCard = (props) => {
                     <h1 style={{color: "#C23532"}}>{props.nombre}</h1>
                   </div>
                   <div className='precio'>
-                    <h2 style={{color: "#E5948F"}}>{props.precio}</h2>
-                  </div>
-                  <div className='descripcion'>
-                    <h5>Descripción</h5>
-                    <ul>
-                      {descripcion.map((punto, index) => (
-                        <li key={index} style={{ marginTop: '8px' }}>{punto}</li>
-                      ))}
-                    </ul>
+                    <h2 style={{color: "#C23532"}}>{props.precio}</h2>
                   </div>
                 </div>
               </div>
@@ -105,7 +96,6 @@ const ProductCard = (props) => {
                     img: props.img,
                     nombre: props.nombre,
                     precio: parseFloat(props.precio.replace('Q', '').trim()), // Convierte la cadena en un número
-                    descripcion: props.descripcion,
                     categoria: props.categoria,
                     cantidad: selectedOption
                   });
