@@ -5,24 +5,38 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import './catalogo.css';
 
-import producto1 from '../../assets/imas/Producto1.jpg';
-import producto2 from '../../assets/imas/Producto2.jpg';
-import producto3 from '../../assets/imas/Producto3.jpg';
-import producto4 from '../../assets/imas/Producto4.jpg';
-import producto5 from '../../assets/imas/Producto5.jpg';
-import producto6 from '../../assets/imas/Producto6.jpg';
-import producto7 from '../../assets/imas/Producto7.jpg';
-import producto8 from '../../assets/imas/Producto8.jpg';
-import producto9 from '../../assets/imas/Producto9.jpg';
-import producto10 from '../../assets/imas/Producto10.jpg';
+import canasta1 from '../../assets/Flores/Canasta/Canasta1.jpeg';
+import canasta2 from '../../assets/Flores/Canasta/Canasta2.jpeg';
+import canasta3 from '../../assets/Flores/Canasta/Canasta3.jpeg';
+import canasta4 from '../../assets/Flores/Canasta/Canasta4.jpeg';
+
+import evento1 from '../../assets/Flores/Eventos/Evento1.jpeg';
+import evento2 from '../../assets/Flores/Eventos/Evento2.jpeg';
+import evento3 from '../../assets/Flores/Eventos/Evento3.jpeg';
+
+import caja1 from '../../assets/Flores/Caja/Caja1.jpeg';
+import caja2 from '../../assets/Flores/Caja/Caja2.jpeg';
+import caja3 from '../../assets/Flores/Caja/Caja3.jpeg';
+
+import arreF1 from '../../assets/Flores/ArregloF/ArregloF1.jpeg';
+import arreF2 from '../../assets/Flores/ArregloF/ArregloF2.jpeg';
+import arreF3 from '../../assets/Flores/ArregloF/ArregloF3.jpeg';
+
+import arreG1 from '../../assets/Flores/ArregloG/Globo1.jpeg';
+import arreG2 from '../../assets/Flores/ArregloG/Globo2.jpeg';
+import arreG3 from '../../assets/Flores/ArregloG/Globo3.jpeg';
+
+import ramo1 from '../../assets/Flores/Ramo/Ramo1.jpeg';
 
 function Catalogo({ addToCart }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
+  const [showCategories, setShowCategories] = useState({ Canastas: true, Eventos: true, Cajas: true, ArreglosF: true, ArreglosG: true, Ramos: true }); 
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
-  
+
   const handleShow = (breakpoint, product) => {
     addToCart(product); // Utiliza addToCart en lugar de setCart
     setFullscreen(breakpoint);
@@ -30,96 +44,64 @@ function Catalogo({ addToCart }) {
     setSelectedProduct(product); // Actualiza el producto seleccionado
   };
 
-  const filteredProductsVestidos = [
-    {
-      img: producto1, nombre: 'Vestido Largo', precio: 'Q 300.00', descripcion: ["Vestido largo con estampado floral.",
-        "Mangas cortas.",
-        "Tela suave y cómoda de alta calidad.",
-        "Ideal para ocasiones formales y casuales.",
-        "Disponible en varias tallas y colores."], categoria: 'Vestidos'
-    },
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+  };
 
-    {
-      img: producto3, nombre: 'Vestido Cafe', precio: 'Q 500.00', descripcion: ["Vestido corto color café.",
-        "Mangas cortas.",
-        "Tela suave y cómoda de alta calidad.",
-        "Ideal para ocasiones formales y casuales.",
-        "Disponible en varias tallas y colores."], categoria: 'Vestidos'
-    },
+  const toggleCategory = (category) => {
+    setShowCategories((prevCategories) => ({
+      ...prevCategories,
+      [category]: !prevCategories[category],
+    }));
+  };
 
-    {
-      img: producto4, nombre: 'Vestido de Lona', precio: 'Q 400.00', descripcion: ["Vestido corto de lona.",
-        "Mangas cortas.",
-        "Tela suave y cómoda de alta calidad.",
-        "Ideal para ocasiones formales y casuales.",
-        "Disponible en varias tallas y colores."], categoria: 'Vestidos'
-    },
-
-    {
-      img: producto5, nombre: 'Pieza de vestido', precio: 'Q 700.00', descripcion: ["Pieza de vestido.",
-        "Mangas cortas.",
-        "Tela suave y cómoda de alta calidad.",
-        "Ideal para ocasiones formales y casuales.",
-        "Disponible en varias tallas y colores."], categoria: 'Vestidos'
-    },
-
-    {
-      img: producto10, nombre: 'Vestido Negro', precio: 'Q 500.00', descripcion: ["Vestido largo color negro.",
-        "Mangas cortas.",
-        "Tela suave y cómoda de alta calidad.",
-        "Ideal para ocasiones formales y casuales.",
-        "Disponible en varias tallas y colores."], categoria: 'Vestidos'
-    },
+  const filteredProductsCanastas = [
+    {img: canasta1, nombre: 'Canasta de Flores', precio: 'Q 300.00', categoria: 'Canastas'},
+    {img: canasta2, nombre: 'Canasta de Flores', precio: 'Q 350.00', categoria: 'Canastas'},
+    {img: canasta3, nombre: 'Canasta de Flores', precio: 'Q 400.00', categoria: 'Canastas'},
+    {img: canasta4, nombre: 'Canasta de Flores', precio: 'Q 450.00', categoria: 'Canastas'},
   ].filter((product) =>
     product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const filteredProductsAccesorios = [
-    {
-      img: producto2, nombre: 'Bolso Azul', precio: 'Q 250.00', descripcion: ["Bolso de color azul.",
-        "Correa ajustable para llevar al hombro o cruzado.",
-        "Bolsillos internos y externos para mayor organización.",
-        "Elegante diseño para uso diario o eventos especiales.",
-        "Disponible en diferentes colores y tamaños."], categoria: 'Accesorios'
-    },
-
-    {
-      img: producto6, nombre: 'Collar de Estrella', precio: 'Q 300.00', descripcion: ["Collar de estrella de oro de alta calidad.",
-        "Diseño elegante y único.",
-        "Cadena ajustable para diferentes longitudes.",
-        "Ideal para combinar con diferentes estilos.",
-        "Un accesorio llamativo para cualquier ocasión."], categoria: 'Accesorios'
-    },
-
-    {
-      img: producto7, nombre: 'Bolso Blanco', precio: 'Q 250.00', descripcion: ["Bolso de color blanco.",
-        "Correa ajustable para llevar al hombro o cruzado.",
-        "Bolsillos internos y externos para mayor organización.",
-        "Elegante diseño para uso diario o eventos especiales.",
-        "Disponible en diferentes colores y tamaños."], categoria: 'Accesorios'
-    },
-
-    {
-      img: producto8, nombre: 'Bolso Amarillo', precio: 'Q 250.00', descripcion: ["Bolso de color amarillo.",
-        "Correa ajustable para llevar al hombro o cruzado.",
-        "Bolsillos internos y externos para mayor organización.",
-        "Elegante diseño para uso diario o eventos especiales.",
-        "Disponible en diferentes colores y tamaños."], categoria: 'Accesorios'
-    },
-
-    {
-      img: producto9, nombre: 'Bolso de Lona', precio: 'Q 300.00', descripcion: ["Bolso de lona.",
-        "Correa ajustable para llevar al hombro o cruzado.",
-        "Bolsillos internos y externos para mayor organización.",
-        "Elegante diseño para uso diario o eventos especiales.",
-        "Disponible en diferentes colores y tamaños."], categoria: 'Accesorios'
-    },
+  const filteredProductsEventos = [
+    {img: evento1, nombre: 'Arreglo para Evento', precio: 'Q 500.00', categoria: 'Eventos'},
+    {img: evento2, nombre: 'Arreglo para Evento', precio: 'Q 550.00', categoria: 'Eventos'},
+    {img: evento3, nombre: 'Arreglo para Evento', precio: 'Q 500.00', categoria: 'Eventos'},
   ].filter((product) =>
     product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  console.log("Productos de vestidos:", filteredProductsVestidos);
-  console.log("Productos de accesorios:", filteredProductsAccesorios);
+  const filteredProductsCajas = [
+    {img: caja1, nombre: 'Caja de Flores', precio: 'Q 200.00', categoria: 'Cajas'},
+    {img: caja2, nombre: 'Caja de Flores', precio: 'Q 250.00', categoria: 'Cajas'},
+    {img: caja3, nombre: 'Caja de Flores', precio: 'Q 300.00', categoria: 'Cajas'},
+  ].filter((product) =>
+    product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredProductsArreglosF = [
+    {img: arreF1, nombre: 'Arreglo de Flores', precio: 'Q 150.00', categoria: 'ArreglosF'},
+    {img: arreF2, nombre: 'Arreglo de Flores', precio: 'Q 200.00', categoria: 'ArreglosF'},
+    {img: arreF3, nombre: 'Arreglo de Flores', precio: 'Q 250.00', categoria: 'ArreglosF'},
+  ].filter((product) =>
+    product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredProductsArreglosG = [
+    {img: arreG1, nombre: 'Arreglo de Globos', precio: 'Q 100.00', categoria: 'ArreglosG'},
+    {img: arreG2, nombre: 'Arreglo de Globos', precio: 'Q 150.00', categoria: 'ArreglosG'},
+    {img: arreG3, nombre: 'Arreglo de Globos', precio: 'Q 200.00', categoria: 'ArreglosG'},
+  ].filter((product) =>
+    product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredProductsRamos = [
+    {img: ramo1, nombre: 'Ramo de Flores', precio: 'Q 100.00', categoria: 'Ramos'},
+  ].filter((product) =>
+    product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
 
   return (
     <div className="container">
@@ -137,42 +119,103 @@ function Catalogo({ addToCart }) {
           />
         </div>
         <div className="filtros">
-          Filtros
-          <div className="iconoF">
-            <FontAwesomeIcon icon={faFilter} />
-          </div>
+          <button onClick={toggleFilters}><FontAwesomeIcon icon={faFilter} />Filtros</button>
         </div>
       </div>
 
-      <div className="Vestidos">
-        <h1>Vestidos</h1>
+      {showFilters && (
+        <div className="filters-container">
+          <h2 style={{marginTop:'1rem'}}>Categorías</h2>
+          <label>
+            <input
+              type="checkbox"
+              checked={showCategories.Canastas}
+              onChange={() => toggleCategory('Canastas')}
+            />
+            Canastas
+          </label>
+          <br></br>
+          <label>
+            <input
+              type="checkbox"
+              checked={showCategories.Eventos}
+              onChange={() => toggleCategory('Eventos')}
+            />
+            Eventos
+          </label>
+          <br></br>
+          <label>
+            <input
+              type="checkbox"
+              checked={showCategories.Cajas}
+              onChange={() => toggleCategory('Cajas')}
+            />
+            Cajas
+          </label>
+          <br></br>
+          <label>
+            <input
+              type="checkbox"
+              checked={showCategories.ArreglosF}
+              onChange={() => toggleCategory('ArreglosF')}
+            />
+            Arreglos de Flores
+          </label>
+          <br></br>
+          <label>
+            <input
+              type="checkbox"
+              checked={showCategories.ArreglosG}
+              onChange={() => toggleCategory('ArreglosG')}
+            />
+            Arreglos de Globos
+          </label>
+          <br></br>
+          <label>
+            <input
+              type="checkbox"
+              checked={showCategories.Ramos}
+              onChange={() => toggleCategory('Ramos')}
+            />
+            Ramos
+          </label>
+        </div>
+      )}
+
+      <div className="Canastas">
+        {showCategories.Canastas && (
+          <h1>Canastas de Flores</h1>
+        )}
+        {showCategories.Canastas && ( // Muestra los productos si la categoría está activa}
         <div className="product-container">
-          {filteredProductsVestidos.map((product, index) => (
+          {filteredProductsCanastas.map((product, index) => (
             <div className={`product${index + 1}`} key={index}>
               <ProductCard
                 img={product.img}
                 nombre={product.nombre}
                 precio={product.precio}
-                descripcion={product.descripcion}
                 categoria={product.categoria}
                 addToCart={addToCart}
                 handleShow={() => handleShow(true, product)} // Pasa el producto y maneja el modal
               />
             </div>
           ))}
-
         </div>
+        )}
       </div>
-      <div className="Accesorios">
-        <h1>Accesorios</h1>
+
+      <div className="Eventos">
+        {showCategories.Eventos && (
+          <h1>Arreglos de Eventos</h1>
+        )}
+        {showCategories.Eventos && ( // Muestra los productos si la categoría está activa}
         <div className="product-container">
-          {filteredProductsAccesorios.map((product, index) => (
+          {filteredProductsEventos.map((product, index) => (
             <div className={`product${index + 1}`} key={index}>
               <ProductCard
                 img={product.img}
                 nombre={product.nombre}
                 precio={product.precio}
-                descripcion={product.descripcion}
                 categoria={product.categoria}
                 addToCart={addToCart}
                 handleShow={() => handleShow(true, product)} // Pasa el producto y maneja el modal
@@ -180,6 +223,95 @@ function Catalogo({ addToCart }) {
             </div>
           ))}
         </div>
+        )}
+      </div>
+
+      <div className="Cajas">
+        {showCategories.Cajas && (
+          <h1>Cajas de Flores</h1>
+        )}
+        {showCategories.Cajas && ( // Muestra los productos si la categoría está activa}
+        <div className="product-container">
+          {filteredProductsCajas.map((product, index) => (
+            <div className={`product${index + 1}`} key={index}>
+              <ProductCard
+                img={product.img}
+                nombre={product.nombre}
+                precio={product.precio}
+                categoria={product.categoria}
+                addToCart={addToCart}
+                handleShow={() => handleShow(true, product)} // Pasa el producto y maneja el modal
+              />
+            </div>
+          ))}
+        </div>
+        )}
+      </div>
+
+      <div className="ArreglosF">
+        {showCategories.ArreglosF && (
+          <h1>Arreglos de Flores</h1>
+        )}
+        {showCategories.ArreglosF && ( // Muestra los productos si la categoría está activa}
+        <div className="product-container">
+          {filteredProductsArreglosF.map((product, index) => (
+            <div className={`product${index + 1}`} key={index}>
+              <ProductCard
+                img={product.img}
+                nombre={product.nombre}
+                precio={product.precio}
+                categoria={product.categoria}
+                addToCart={addToCart}
+                handleShow={() => handleShow(true, product)} // Pasa el producto y maneja el modal
+              />
+            </div>
+          ))}
+        </div>
+        )}
+      </div>
+
+      <div className="ArreglosG">
+        {showCategories.ArreglosG && (
+          <h1>Arreglos de Globos</h1>
+        )}
+        {showCategories.ArreglosG && ( // Muestra los productos si la categoría está activa}
+        <div className="product-container">
+          {filteredProductsArreglosG.map((product, index) => (
+            <div className={`product${index + 1}`} key={index}>
+              <ProductCard
+                img={product.img}
+                nombre={product.nombre}
+                precio={product.precio}
+                categoria={product.categoria}
+                addToCart={addToCart}
+                handleShow={() => handleShow(true, product)} // Pasa el producto y maneja el modal
+              />
+            </div>
+          ))}
+        </div>
+        )}
+      </div>
+
+      <div className="Ramos">
+        {showCategories.Ramos && (
+          <h1>Ramos</h1>
+        )}
+        {showCategories.Ramos && ( // Muestra los productos si la categoría está activa}
+        <div className="product-container">
+          {filteredProductsRamos.map((product, index) => (
+            <div className={`product${index + 1}`} key={index}>
+              <ProductCard
+                img={product.img}
+                nombre={product.nombre}
+                precio={product.precio}
+                categoria={product.categoria}
+                addToCart={addToCart}
+                handleShow={() => handleShow(true, product)} // Pasa el producto y maneja el modal
+              />
+            </div>
+          ))}
+        </div>
+        )}
       </div>
     </div>
   );

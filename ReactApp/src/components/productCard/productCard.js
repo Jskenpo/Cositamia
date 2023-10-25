@@ -7,27 +7,35 @@ import Form from 'react-bootstrap/Form';
 import './productCard.css';
 
 const ProductCard = (props) => {
+  // Estado para controlar si el mouse está sobre la tarjeta
   const [isHovered, setIsHovered] = useState(false);
+
+  // Valores para controlar la presentación de la modal
   const values = [true];
   const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('Cantidad');
-  const { descripcion } = props;
 
+  // Opción seleccionada en el formulario
+  const [selectedOption, setSelectedOption] = useState('Cantidad');
+
+  // Función para mostrar la modal
   const handleShow = (breakpoint, product) => {
     console.log("Mostrando detalles de producto:", product);
     setFullscreen(breakpoint);
     setShow(true);
   };
 
+  // Función para manejar el evento "mouseEnter" (cuando el mouse entra en la tarjeta)
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
 
+  // Función para manejar el evento "mouseLeave" (cuando el mouse sale de la tarjeta)
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
 
+  // Función para manejar el cambio en el formulario de selección
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -46,25 +54,23 @@ const ProductCard = (props) => {
         <Card.Img variant="top" src={props.img} alt="Productos" />
         <Card.Body>
           <Card.Title>{props.nombre}</Card.Title>
-        </Card.Body>
-        <ListGroup className="list-group-flush">
           <ListGroup.Item>{props.precio}</ListGroup.Item>
-        </ListGroup>
+        </Card.Body>
         <Card.Body>
           {values.map((v, idx) => (
             <Button
-              style={{ backgroundColor: '#B2B6BD', borderColor: '#B2B6BD' }}
+              style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}
               key={idx}
               className="me-2 mb-2"
-              onClick={() => handleShow(v, props)} // Pasa el producto y las props
+              onClick={() => handleShow(v, props)} // Abre la modal y pasa los detalles del producto
             >
               Más detalles
               {typeof v === 'string' && `below ${v.split('-')[0]}`}
             </Button>
           ))}
-          <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+          <Modal show={show} size="lg" onHide={() => setShow(false)}>
             <Modal.Header closeButton>
-              <h1>{props.nombre}</h1>
+              <h1 style={{ color: "#C23532" }}>Detalles del artículo</h1>
             </Modal.Header>
             <Modal.Body>
               <div className='contenedor'>
@@ -73,18 +79,10 @@ const ProductCard = (props) => {
                 </div>
                 <div className={`informacion ${props.categoria === 'Accesorios' ? 'accesorio-info' : ''}`}>
                   <div className='detalles'>
-                    <h1>Detalles del artículo</h1>
+                    <h1 style={{ color: "#C23532" }}>{props.nombre}</h1>
                   </div>
                   <div className='precio'>
-                    <h2>{props.precio}</h2>
-                  </div>
-                  <div className='descripcion'>
-                    <h5>Descripción</h5>
-                    <ul>
-                      {descripcion.map((punto, index) => (
-                        <li key={index} style={{ marginTop: '8px' }}>{punto}</li>
-                      ))}
-                    </ul>
+                    <h2 style={{ color: "#C23532" }}>{props.precio}</h2>
                   </div>
                 </div>
               </div>
@@ -95,17 +93,18 @@ const ProductCard = (props) => {
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
               </Form.Select>
 
               <Button
                 variant="primary"
-                style={{ backgroundColor: '#B2B6BD', borderColor: '#B2B6BD' }}
+                style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}
                 onClick={() => {
                   props.addToCart({
                     img: props.img,
                     nombre: props.nombre,
                     precio: parseFloat(props.precio.replace('Q', '').trim()), // Convierte la cadena en un número
-                    descripcion: props.descripcion,
                     categoria: props.categoria,
                     cantidad: selectedOption
                   });
@@ -115,8 +114,6 @@ const ProductCard = (props) => {
               >
                 Agregar al carrito
               </Button>
-
-
             </Modal.Footer>
           </Modal>
         </Card.Body>
