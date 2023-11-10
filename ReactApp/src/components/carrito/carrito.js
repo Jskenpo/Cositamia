@@ -10,18 +10,7 @@ import './carrito.css';
 
 function Carrito({ cart, setCart }) {
     const navigate = useNavigate();
-    const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    const handleRemoveProduct = (index) => {
-        const updatedCart = [...cart];
-        updatedCart.splice(index, 1);
-        setCart(updatedCart); // Actualiza el estado del carrito
-    };
-
-    console.log("Productos en el carrito:", cart);
     const calculateCosts = () => {
         const subtotal = cart.reduce((total, item) => total + (parseFloat(item.precio) * item.cantidad), 0);
         const shipping = 100.00;
@@ -31,6 +20,210 @@ function Carrito({ cart, setCart }) {
     };
     const { subtotal, shipping, total } = calculateCosts();
 
+
+    const [show, setShow] = useState(false);
+
+    const [formDataOrden, setFormDataOrden] = useState({
+        fecha: new Date(),
+        idCliente: 0,
+        subTotal: 0,
+        envio: 100,
+        total: 0
+    });
+
+    const [formDataSetDetalle, setFormDataSetDetalle] = useState({
+        id_orden: "",
+        sku: "",
+        cantidad: "",
+        precio: ""
+    });
+
+    const [formDataCliente, setFormDataCliente] = useState({
+        nombre: "",
+        nit: "",
+        direccion: "",
+        telefono: "",
+        correo: "",
+        cod_postal: ""
+    });
+
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormDataCliente({ ...formDataCliente, [name]: value });
+    };
+
+    function realizarSolicitud() {
+        const nit = parseInt(formDataCliente["nit"]);
+
+        fetch(`http://localhost:3161/cliente/${nit}`)
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.length > 0) {
+                    // Mostrar la información del cliente en el resultadoDiv
+                    const cliente = data[0];
+                    const idCliente = cliente["id_cliente"];
+                    console.log(idCliente + " funcion"); // Imprimir el ID del cliente
+                    return idCliente;
+                }
+                return null;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        
+    }
+
+    const handleSubmit = async () => {
+        try {
+            // Obtención de clientes
+            let idCliente = -1;
+
+            let idClt = realizarSolicitud();
+
+            console.log(idClt+ "idClt");
+
+            
+            if (idClt == null) {
+
+                //console.log(formDataCliente); // Imprimir el ID del cliente
+                //console.log(JSON.stringify(formDataCliente)); // Imprimir el ID del cliente
+
+                const json = JSON.stringify(formDataCliente);
+                fetch('http://localhost:3161/cliente', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: json
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        //console.log(data); // Aquí puedes manejar la respuesta del servidor
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            
+                const nit = parseInt(formDataCliente["nit"]);
+                var iDcliente = 0;
+                fetch(`http://localhost:3161/cliente/${nit}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        //console.log(data);
+        
+                        if (data.length > 0) {
+                        // Mostrar la información del cliente en el resultadoDiv
+                        const cliente = data[0];
+                        iDcliente = cliente["id_cliente"];
+                        console.log(idCliente + " fuera de funcion"); // Imprimir el ID del cliente
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                
+
+                setFormDataOrden({
+                    fecha: new Date(),
+                    idCliente: iDcliente,
+                    subTotal: calculateCosts().subtotal,
+                    envio: shipping,
+                    total: calculateCosts().total
+                });
+
+                fetch('http://localhost:3161/orden', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formDataOrden)
+                }).then(response => response.json())
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+/*
+                
+                fetch('http://localhost:3161/LastOrder', {
+                    method: 'GET'
+                });
+                const dataOrden = await getOrden.json();
+
+                for(let i = 0; i < cart.length; i++) {
+                    setFormDataSetDetalle({
+                        id_orden: dataOrden['id_orden'],
+                        sku: cart[i]['sku'],
+                        cantidad: cart[i]['cantidad'],
+                        precio: cart[i]['precio']
+                    });
+
+                    fetch('http://localhost:3161/ordenDetalle', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formDataSetDetalle)
+                    });
+                }*/
+            } else {
+                setFormDataOrden({
+                    fecha: new Date(),
+                    idCliente: idClt,
+                    subTotal: calculateCosts().subtotal,
+                    envio: shipping,
+                    total: calculateCosts().total
+                });
+                
+                //console.log(formDataOrden); // Imprimir el ID del cliente
+
+                fetch('http://localhost:3161/orden', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formDataOrden)
+                })
+/*
+                
+                fetch('http://localhost:3161/LastOrder', {
+                    method: 'GET'
+                });
+                const dataOrden = await getOrden.json();
+
+                for(let i = 0; i < cart.length; i++) {
+                    setFormDataSetDetalle({
+                        id_orden: dataOrden['id_orden'],
+                        sku: cart[i]['sku'],
+                        cantidad: cart[i]['cantidad'],
+                        precio: cart[i]['precio']
+                    });
+
+                    fetch('http://localhost:3161/ordenDetalle', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formDataSetDetalle)
+                    });
+                }*/
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleRemoveProduct = (index) => {
+        const updatedCart = [...cart];
+        updatedCart.splice(index, 1);
+        setCart(updatedCart); // Actualiza el estado del carrito
+    };
+
+    
+    
     const handleClickCatalogo = () => {
         navigate('/catalogo');
     };
@@ -39,7 +232,7 @@ function Carrito({ cart, setCart }) {
         <div className="container">
             <div className="row">
                 <div className="col-12">
-                    <h1 className="titulo" style={{color: "#C23532"}}>Tu Carrito</h1>
+                    <h1 className="titulo" style={{ color: "#C23532" }}>Tu Carrito</h1>
                 </div>
             </div>
             <div className="row">
@@ -102,118 +295,60 @@ function Carrito({ cart, setCart }) {
                 <div className="col mb-2">
                     <div className="row">
                         <div className="col-sm-12 col-md-6">
-                            <button className="btn btn-block btn-light" onClick={handleClickCatalogo} style={{backgroundColor: '#E5948F', borderColor: '#E5948F', color: "#ffffff"}}>Continuar Comprando</button>
+                            <button className="btn btn-block btn-light" onClick={handleClickCatalogo} style={{ backgroundColor: '#E5948F', borderColor: '#E5948F', color: "#ffffff" }}>Continuar Comprando</button>
                         </div>
                         <div className="col-sm-12 col-md-6 text-right">
                             <button className="btn btn-lg btn-block btn-success text-uppercase" onClick={handleShow} style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}>Realizar pedido</button>
 
                             <Modal show={show} onHide={handleClose} animation={false}>
                                 <Modal.Header closeButton>
-                                    <Modal.Title>Orden de Pago</Modal.Title>
+                                    <Modal.Title>Realizar Pedido</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
                                     <Form>
                                         <Row className="mb-3">
                                             <Form.Group as={Col} controlId="formGridName">
-                                                <Form.Label>Nombre</Form.Label>
-                                                <Form.Control type="name" placeholder="Nombre" />
-                                            </Form.Group>
-
-                                            <Form.Group as={Col} controlId="formGridLastName">
-                                                <Form.Label>Apellido</Form.Label>
-                                                <Form.Control type="lastname" placeholder="Apellido" />
+                                                <Form.Label>Nombre y apellido</Form.Label>
+                                                <Form.Control type="name" name="nombre" placeholder="Nombre" onChange={handleInputChange} />
                                             </Form.Group>
                                         </Row>
 
                                         <Row className="mb-3">
                                             <Form.Group as={Col} controlId="formGridEmail">
                                                 <Form.Label>Correo</Form.Label>
-                                                <Form.Control type="email" placeholder="Correo" />
+                                                <Form.Control type="email" name="correo" placeholder="Correo" onChange={handleInputChange} />
                                             </Form.Group>
 
                                             <Form.Group as={Col} controlId="formGridPassword">
-                                                <Form.Label>Contraseña</Form.Label>
-                                                <Form.Control type="password" placeholder="Contraseña" />
+                                                <Form.Label>Teléfono</Form.Label>
+                                                <Form.Control type="tel" name="telefono" placeholder="Teléfono" onChange={handleInputChange} />
                                             </Form.Group>
                                         </Row>
 
                                         <Form.Group className="mb-3" controlId="formGridAddress1">
-                                            <Form.Label>Dirección 1</Form.Label>
-                                            <Form.Control placeholder="Calle, número de casa, zona" />
+                                            <Form.Label>NIT</Form.Label>
+                                            <Form.Control type="text" name="nit" placeholder="NIT" onChange={handleInputChange} />
                                         </Form.Group>
 
                                         <Form.Group className="mb-3" controlId="formGridAddress2">
-                                            <Form.Label>Dirección 2</Form.Label>
-                                            <Form.Control placeholder="Apartamento, colonia, casa" />
+                                            <Form.Label>Dirección</Form.Label>
+                                            <Form.Control type="text" name="direccion" placeholder="Calle, avenida, zona" onChange={handleInputChange} />
                                         </Form.Group>
 
                                         <Row className="mb-3">
-                                            <Form.Group as={Col} controlId="formGridCity">
-                                                <Form.Label>Ciudad</Form.Label>
-                                                <Form.Control placeholder="Guatemala" />
-                                            </Form.Group>
-
-                                            <Form.Group as={Col} controlId="formGridState">
-                                                <Form.Label>Departamento</Form.Label>
-                                                <Form.Select defaultValue="Choose...">
-                                                    <option>Escoger...</option>
-                                                    <option>...</option>
-                                                </Form.Select>
-                                            </Form.Group>
-
                                             <Form.Group as={Col} controlId="formGridZip">
                                                 <Form.Label>Código postal</Form.Label>
-                                                <Form.Control />
+                                                <Form.Control type="text" name="cod_postal" onChange={handleInputChange} />
                                             </Form.Group>
                                         </Row>
-
-                                        <fieldset>
-                                            <h6>Tipo de tarjeta</h6>
-                                            <Form.Group as={Row} className="mb-3">
-                                                <Col sm={10}>
-                                                    <Form.Check
-                                                        type="radio"
-                                                        label="Tarjeta de crédito"
-                                                        name="formHorizontalRadios"
-                                                        id="formHorizontalRadios1"
-                                                    />
-                                                    <Form.Check
-                                                        type="radio"
-                                                        label="Tarjeta de débito"
-                                                        name="formHorizontalRadios"
-                                                        id="formHorizontalRadios2"
-                                                    />
-                                                </Col>
-                                            </Form.Group>
-                                        </fieldset>
-
-                                        <Form.Group className="mb-3" controlId="formGridNameCard">
-                                            <Form.Label>Nombre de la tarjeta</Form.Label>
-                                            <Form.Control placeholder="Nombre" />
-                                        </Form.Group>
-
-                                        <Form.Group className="mb-3" controlId="formGridCreditNumber">
-                                            <Form.Label>Número de tarjeta</Form.Label>
-                                            <Form.Control placeholder="" />
-                                        </Form.Group>
-
-                                        <Form.Group className="mb-3" controlId="formGrid">
-                                            <Form.Label>Fecha de vencimiento</Form.Label>
-                                            <Form.Control placeholder="" />
-                                        </Form.Group>
-
-                                        <Form.Group className="mb-3" controlId="formGridAddress2">
-                                            <Form.Label>Código de seguridad (CVV)</Form.Label>
-                                            <Form.Control placeholder="" />
-                                        </Form.Group>
                                     </Form>
                                 </Modal.Body>
                                 <Modal.Footer>
                                     <Button variant="secondary" onClick={handleClose} style={{ backgroundColor: '#E5948F', borderColor: '#E5948F' }}>
                                         Cancelar
                                     </Button>
-                                    <Button variant="primary" onClick={handleClose} style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}>
-                                        Realizar pago
+                                    <Button variant="primary" onClick={handleSubmit} style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}>
+                                        Realizar pedido
                                     </Button>
                                 </Modal.Footer>
                             </Modal>
