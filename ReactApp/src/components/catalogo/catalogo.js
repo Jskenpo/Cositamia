@@ -20,19 +20,30 @@ function Catalogo({ addToCart }) {
       const categoriesResponse = await fetch('http://localhost:3161/categorias');
       const categories = await categoriesResponse.json();
       const allProducts = {};
-
+  
       for (const category of categories) {
         const productsResponse = await fetch(`http://localhost:3161/arreglos/${category.id_categoria}`);
         const products = await productsResponse.json();
-        allProducts[category.id_categoria] = products;
+  
+        // Fetch images from FileServer_Flores
+        const imagesResponse = await fetch(`http://localhost:3070/arreglos/${category.id_categoria}`);
+        const images = await imagesResponse.json();
+  
+        // Combine products and images
+        const productsWithImages = products.map((product, index) => ({
+          ...product,
+          imagen: images[index]?.imagen ? `data:image/jpeg;base64,${images[index].imagen}` : null,
+        }));
+  
+        allProducts[category.id_categoria] = productsWithImages;
       }
-
+  
       setProducts(allProducts);
       console.log('Products:', allProducts);
     } catch (error) {
       console.log("Error fetching products:", error);
     }
-  };
+  };  
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -147,6 +158,7 @@ function Catalogo({ addToCart }) {
                 <ProductCard
                   nombre={product["Nombre del Arreglo"]}
                   precio={'Q'+product.Precio+'.00'}
+                  img={product.imagen}
                   addToCart={addToCart}
                   handleShow={handleShow}
                 />
@@ -168,6 +180,7 @@ function Catalogo({ addToCart }) {
                 <ProductCard
                   nombre={product["Nombre del Arreglo"]}
                   precio={'Q'+product.Precio+'.00'}
+                  img={product.imagen}
                   addToCart={addToCart}
                   handleShow={handleShow}
                 />
@@ -189,6 +202,7 @@ function Catalogo({ addToCart }) {
                 <ProductCard
                   nombre={product["Nombre del Arreglo"]}
                   precio={'Q'+product.Precio+'.00'}
+                  img={product.imagen}
                   addToCart={addToCart}
                   handleShow={handleShow}
                 />
@@ -210,6 +224,7 @@ function Catalogo({ addToCart }) {
                 <ProductCard
                   nombre={product["Nombre del Arreglo"]}
                   precio={'Q'+product.Precio+'.00'}
+                  img={product.imagen}
                   addToCart={addToCart}
                   handleShow={handleShow}
                 />
@@ -231,6 +246,7 @@ function Catalogo({ addToCart }) {
                 <ProductCard
                   nombre={product["Nombre del Arreglo"]}
                   precio={'Q'+product.Precio+'.00'}
+                  img={product.imagen}
                   addToCart={addToCart}
                   handleShow={handleShow}
                 />
