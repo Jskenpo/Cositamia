@@ -106,9 +106,9 @@ function Carrito({ cart, setCart }) {
                                 formDataSetDetalle['id_orden'] = data[0].id_orden;
 
                                 for (let i = 0; i<cart.length; i++){
-                                    formDataSetDetalle['sku'] = cart[y].sku;
-                                    formDataSetDetalle['cantidad'] = cart[x].cantidad;
-                                    formDataSetDetalle['precio'] = cart[x].precio;
+                                    formDataSetDetalle['sku'] = cart[i].sku;
+                                    formDataSetDetalle['cantidad'] = cart[i].cantidad;
+                                    formDataSetDetalle['precio'] = cart[i].precio;
 
                                     fetch('http://localhost:3161/ordenDetalle', {
                                         method: 'POST',
@@ -129,7 +129,90 @@ function Carrito({ cart, setCart }) {
                             })
 
                     } else {
-                        return null;
+                        // Post Cliente
+                        fetch('http://localhost:3161/cliente', {
+                            method: 'POST',
+                            body: JSON.stringify(formDataCliente),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data)
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            })
+                        
+                        const nit = parseInt(formDataCliente["nit"])
+                        fetch(`http://localhost:3161/cliente/${nit}`,{
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                const cliente = data[0].id_cliente;
+
+                                formDataOrden["id_cliente"] = cliente;
+                                formDataOrden["subtotal"] = subtotal;
+                                formDataOrden["total"] = total;
+                                setFormDataOrden(formDataOrden);
+
+                                console.log(formDataOrden);
+
+                                // Post Orden
+                                fetch('http://localhost:3161/orden', {
+                                    method: 'POST',
+                                    body: JSON.stringify(formDataOrden),
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
+                                })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        console.log(data)
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                    })
+
+                                fetch(`http://localhost:3161/LastOrder`,{
+                                    method: 'GET',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
+                                })
+                                    .then(response => response.json())
+                                    .then(data => {
+
+                                        formDataSetDetalle['id_orden'] = data[0].id_orden;
+
+                                        for (let i = 0; i<cart.length; i++){
+                                            formDataSetDetalle['sku'] = cart[i].sku;
+                                            formDataSetDetalle['cantidad'] = cart[i].cantidad;
+                                            formDataSetDetalle['precio'] = cart[i].precio;
+
+                                            fetch('http://localhost:3161/ordenDetalle', {
+                                                method: 'POST',
+                                                body: JSON.stringify(formDataSetDetalle),
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                }
+                                            })
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    console.log(data)
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error:', error);
+                                                }
+                                            )
+                                        }
+                                    })
+                            })
                     }
                 })
                 .catch(error => {
