@@ -74,32 +74,27 @@
 }
 
 
-.Canastas {
+.ArreglosF {
   position: relative;
   top: 1rem;
 }
 
-.Eventos {
+.Globos {
   position: relative;
   top: 3rem;
 }
 
-.Cajas {
+.CanastaRegalos {
   position: relative;
   top: 3rem;
 }
 
-.ArreglosF {
+.CanastaF {
   position: relative;
   top: 3rem;
 }
 
-.ArreglosG {
-  position: relative;
-  top: 3rem;
-}
-
-.Ramos {
+.Regalos {
   position: relative;
   top: 3rem;
 }

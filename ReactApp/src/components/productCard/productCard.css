@@ -18,19 +18,6 @@
     right: 30%;
 }
 
-.accesorio-img{
-    position: relative;
-    margin-left: 5%;
-    padding: 1rem;
-}
-
-.accesorio-img img{
-    position: relative;
-    width: 100%;
-    height: 80%;
-    margin-top: 8%;
-}
-
 .informacion{
     position: relative;
     margin-left: 15%;
@@ -38,13 +25,6 @@
     display: block;
     padding: 1rem;
     right: 20%;
-}
-
-.accesorio-info{
-    position: relative;
-    margin-left: 5%;
-    display: block;
-    padding: 1rem;
 }
 
 .detalles{

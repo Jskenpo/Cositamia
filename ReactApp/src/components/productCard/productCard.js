@@ -74,10 +74,10 @@ const ProductCard = (props) => {
             </Modal.Header>
             <Modal.Body>
               <div className='contenedor'>
-                <div className={`imagen ${props.categoria === 'Accesorios' ? 'accesorio-img' : ''}`}>
+                <div className="imagen">
                   <img src={props.img} alt="Productos" />
                 </div>
-                <div className={`informacion ${props.categoria === 'Accesorios' ? 'accesorio-info' : ''}`}>
+                <div className="informacion">
                   <div className='detalles'>
                     <h1 style={{ color: "#C23532" }}>{props.nombre}</h1>
                   </div>
@@ -104,7 +104,8 @@ const ProductCard = (props) => {
                   props.addToCart({
                     img: props.img,
                     nombre: props.nombre,
-                    precio: parseFloat(props.precio.replace('Q', '').trim()), // Convierte la cadena en un número
+                    precio: parseFloat(props.precio.replace('Q', '').trim()),
+                    sku: props.sku,
                     categoria: props.categoria,
                     cantidad: selectedOption
                   });
