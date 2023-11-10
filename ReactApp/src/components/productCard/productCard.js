@@ -74,10 +74,10 @@ const ProductCard = (props) => {
             </Modal.Header>
             <Modal.Body>
               <div className='contenedor'>
-                <div className={`imagen ${props.categoria === 'Accesorios' ? 'accesorio-img' : ''}`}>
+                <div className="imagen">
                   <img src={props.img} alt="Productos" />
                 </div>
-                <div className={`informacion ${props.categoria === 'Accesorios' ? 'accesorio-info' : ''}`}>
+                <div className="informacion">
                   <div className='detalles'>
                     <h1 style={{ color: "#C23532" }}>{props.nombre}</h1>
                   </div>
