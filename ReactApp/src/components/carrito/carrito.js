@@ -25,8 +25,8 @@ function Carrito({ cart, setCart }) {
 
     const [formDataOrden, setFormDataOrden] = useState({
         fecha: new Date(),
-        idCliente: 0,
-        subTotal: 0,
+        id_cliente: 0,
+        subtotal: 0,
         envio: 100,
         total: 0
     });
@@ -57,160 +57,85 @@ function Carrito({ cart, setCart }) {
     };
 
     function realizarSolicitud() {
-        const nit = parseInt(formDataCliente["nit"]);
-
-        fetch(`http://localhost:3161/cliente/${nit}`)
-            .then(response => response.json())
-            .then(data => {
-
-                if (data.length > 0) {
-                    // Mostrar la información del cliente en el resultadoDiv
-                    const cliente = data[0];
-                    const idCliente = cliente["id_cliente"];
-                    console.log(idCliente + " funcion"); // Imprimir el ID del cliente
-                    return idCliente;
-                }
-                return null;
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        
+       
     }
 
     const handleSubmit = async () => {
         try {
-            // Obtención de clientes
-            let idCliente = -1;
-
-            let idClt = realizarSolicitud();
-
-            console.log(idClt+ "idClt");
-
             
-            if (idClt == null) {
+            const nit = parseInt(formDataCliente["nit"])
 
-                //console.log(formDataCliente); // Imprimir el ID del cliente
-                //console.log(JSON.stringify(formDataCliente)); // Imprimir el ID del cliente
+            fetch(`http://localhost:3161/cliente/${nit}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const cliente = data[0].id_cliente;
+                        
+                        formDataOrden["id_cliente"] = cliente;
+                        formDataOrden["subtotal"] = subtotal;
+                        formDataOrden["total"] = total;
+                        setFormDataOrden(formDataOrden);
 
-                const json = JSON.stringify(formDataCliente);
-                fetch('http://localhost:3161/cliente', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: json
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        //console.log(data); // Aquí puedes manejar la respuesta del servidor
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            
-                const nit = parseInt(formDataCliente["nit"]);
-                var iDcliente = 0;
-                fetch(`http://localhost:3161/cliente/${nit}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        //console.log(data);
-        
-                        if (data.length > 0) {
-                        // Mostrar la información del cliente en el resultadoDiv
-                        const cliente = data[0];
-                        iDcliente = cliente["id_cliente"];
-                        console.log(idCliente + " fuera de funcion"); // Imprimir el ID del cliente
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-                
+                        console.log(formDataOrden);
+                        
+                        // Post Orden
+                        fetch('http://localhost:3161/orden', {
+                            method: 'POST',
+                            body: JSON.stringify(formDataOrden),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data)
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            })
+                        
+                        fetch(`http://localhost:3161/LastOrder`,{
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
 
-                setFormDataOrden({
-                    fecha: new Date(),
-                    idCliente: iDcliente,
-                    subTotal: calculateCosts().subtotal,
-                    envio: shipping,
-                    total: calculateCosts().total
-                });
+                                formDataSetDetalle['id_orden'] = data[0].id_orden;
 
-                fetch('http://localhost:3161/orden', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formDataOrden)
-                }).then(response => response.json())
+                                for (let i = 0; i<cart.length; i++){
+                                    formDataSetDetalle['sku'] = cart[y].sku;
+                                    formDataSetDetalle['cantidad'] = cart[x].cantidad;
+                                    formDataSetDetalle['precio'] = cart[x].precio;
+
+                                    fetch('http://localhost:3161/ordenDetalle', {
+                                        method: 'POST',
+                                        body: JSON.stringify(formDataSetDetalle),
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        }
+                                    })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            console.log(data)
+                                        })
+                                        .catch(error => {
+                                            console.error('Error:', error);
+                                        }
+                                    )
+                                }
+                            })
+
+                    } else {
+                        return null;
+                    }
+                })
                 .catch(error => {
                     console.error('Error:', error);
                 });
-/*
-                
-                fetch('http://localhost:3161/LastOrder', {
-                    method: 'GET'
-                });
-                const dataOrden = await getOrden.json();
 
-                for(let i = 0; i < cart.length; i++) {
-                    setFormDataSetDetalle({
-                        id_orden: dataOrden['id_orden'],
-                        sku: cart[i]['sku'],
-                        cantidad: cart[i]['cantidad'],
-                        precio: cart[i]['precio']
-                    });
-
-                    fetch('http://localhost:3161/ordenDetalle', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(formDataSetDetalle)
-                    });
-                }*/
-            } else {
-                setFormDataOrden({
-                    fecha: new Date(),
-                    idCliente: idClt,
-                    subTotal: calculateCosts().subtotal,
-                    envio: shipping,
-                    total: calculateCosts().total
-                });
-                
-                //console.log(formDataOrden); // Imprimir el ID del cliente
-
-                fetch('http://localhost:3161/orden', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formDataOrden)
-                })
-/*
-                
-                fetch('http://localhost:3161/LastOrder', {
-                    method: 'GET'
-                });
-                const dataOrden = await getOrden.json();
-
-                for(let i = 0; i < cart.length; i++) {
-                    setFormDataSetDetalle({
-                        id_orden: dataOrden['id_orden'],
-                        sku: cart[i]['sku'],
-                        cantidad: cart[i]['cantidad'],
-                        precio: cart[i]['precio']
-                    });
-
-                    fetch('http://localhost:3161/ordenDetalle', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(formDataSetDetalle)
-                    });
-                }*/
-            }
         } catch (error) {
             console.log(error);
         }
