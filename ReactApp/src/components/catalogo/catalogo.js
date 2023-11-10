@@ -159,6 +159,7 @@ function Catalogo({ addToCart }) {
                   nombre={product["Nombre del Arreglo"]}
                   precio={'Q'+product.Precio+'.00'}
                   img={product.imagen}
+                  sku={product.SKU}
                   addToCart={addToCart}
                   handleShow={handleShow}
                 />
@@ -181,6 +182,7 @@ function Catalogo({ addToCart }) {
                   nombre={product["Nombre del Arreglo"]}
                   precio={'Q'+product.Precio+'.00'}
                   img={product.imagen}
+                  sku={product.SKU}
                   addToCart={addToCart}
                   handleShow={handleShow}
                 />
@@ -203,6 +205,7 @@ function Catalogo({ addToCart }) {
                   nombre={product["Nombre del Arreglo"]}
                   precio={'Q'+product.Precio+'.00'}
                   img={product.imagen}
+                  sku={product.SKU}
                   addToCart={addToCart}
                   handleShow={handleShow}
                 />
@@ -225,6 +228,7 @@ function Catalogo({ addToCart }) {
                   nombre={product["Nombre del Arreglo"]}
                   precio={'Q'+product.Precio+'.00'}
                   img={product.imagen}
+                  sku={product.SKU}
                   addToCart={addToCart}
                   handleShow={handleShow}
                 />
@@ -247,6 +251,7 @@ function Catalogo({ addToCart }) {
                   nombre={product["Nombre del Arreglo"]}
                   precio={'Q'+product.Precio+'.00'}
                   img={product.imagen}
+                  sku={product.SKU}
                   addToCart={addToCart}
                   handleShow={handleShow}
                 />
