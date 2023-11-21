@@ -56,15 +56,9 @@ function Carrito({ cart, setCart }) {
         setFormDataCliente({ ...formDataCliente, [name]: value });
     };
 
-    function realizarSolicitud() {
-       
-    }
-
     const handleSubmit = async () => {
-        try {
-            
+        try {            
             const nit = parseInt(formDataCliente["nit"])
-
             fetch(`http://localhost:3161/cliente/${nit}`)
                 .then(response => response.json())
                 .then(data => {
@@ -229,8 +223,6 @@ function Carrito({ cart, setCart }) {
         updatedCart.splice(index, 1);
         setCart(updatedCart); // Actualiza el estado del carrito
     };
-
-    
     
     const handleClickCatalogo = () => {
         navigate('/catalogo');

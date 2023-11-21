@@ -4,6 +4,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import Icon from '@mdi/react';
+import { mdiHeart } from '@mdi/js';
 import './productCard.css';
 
 const ProductCard = (props) => {
@@ -51,22 +53,39 @@ const ProductCard = (props) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <Card.Img variant="top" src={props.img} alt="Productos" />
+        <Card.Img variant="top" src={props.img} alt="Productos" style={{ height: "300px" }} />
         <Card.Body>
           <Card.Title>{props.nombre}</Card.Title>
           <ListGroup.Item>{props.precio}</ListGroup.Item>
         </Card.Body>
         <Card.Body>
           {values.map((v, idx) => (
-            <Button
-              style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}
-              key={idx}
-              className="me-2 mb-2"
-              onClick={() => handleShow(v, props)} // Abre la modal y pasa los detalles del producto
-            >
-              Más detalles
-              {typeof v === 'string' && `below ${v.split('-')[0]}`}
-            </Button>
+            <div key={idx} className="d-flex justify-content-between align-items-center">
+              <Button
+                style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}
+                className="me-2 mb-2"
+                onClick={() => handleShow(v, props)} // Abre la modal y pasa los detalles del producto
+              >
+                Más detalles
+                {typeof v === 'string' && `below ${v.split('-')[0]}`}
+              </Button>
+              <Button 
+                style={{ backgroundColor: "#fff", borderColor: "#C23532" }}
+                className="me-2 mb-2"
+                onClick={() => {
+                  props.addToFavorite({
+                    img: props.img,
+                    nombre: props.nombre,
+                    precio: parseFloat(props.precio.replace('Q', '').trim()),
+                    sku: props.sku,
+                    descripcion: props.descripcion,
+                    categoria: props.categoria
+                  });
+                }}
+              >
+                <Icon path={mdiHeart} size={1} color="red" />
+              </Button>
+            </div>
           ))}
           <Modal show={show} size="lg" onHide={() => setShow(false)}>
             <Modal.Header closeButton>
