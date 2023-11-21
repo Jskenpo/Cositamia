@@ -2,12 +2,17 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import './favoritos.css';
 
-function Favoritos({ favorite, setFavorite }) {
+function Favoritos({ favorite, setFavorite, addToCart }) {
 
     const handleRemoveProduct = (index) => {
         const updateFavorite = [...favorite];
         updateFavorite.splice(index, 1);
         setFavorite(updateFavorite);
+    };
+
+    const handleAddToCart = (product, index) => {
+        addToCart(product);
+        handleRemoveProduct(index);
     };
 
     return (
@@ -44,6 +49,7 @@ function Favoritos({ favorite, setFavorite }) {
                                             <Button
                                                 variant="primary"
                                                 style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}
+                                                onClick={() => handleAddToCart(item)}
                                             >
                                                 Agregar al carrito
                                             </Button>

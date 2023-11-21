@@ -26,7 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/catalogo" element={<Catalogo addToCart={addToCart} addToFavorite={addToFavorite} />} />
-        <Route path="/favoritos" element={<Favoritos favorite={favorite} setFavorite={setFavorite} />} />
+        <Route path="/favoritos" element={<Favoritos favorite={favorite} setFavorite={setFavorite} addToCart={addToCart} />} />
         <Route path="/acerca" element={<Acerca />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/carrito" element={<Carrito cart={cart} setCart={setCart} />} />

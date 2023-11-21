@@ -20,6 +20,9 @@ const ProductCard = (props) => {
   // Opción seleccionada en el formulario
   const [selectedOption, setSelectedOption] = useState('Cantidad');
 
+  // Opción para favorito
+  const [isFavorite, setIsFavorite] = useState(false);
+
   // Función para mostrar la modal
   const handleShow = (breakpoint, product) => {
     console.log("Mostrando detalles de producto:", product);
@@ -41,6 +44,10 @@ const ProductCard = (props) => {
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
+
+  const handleFavoriteClick = () => {
+    setIsFavorite(!isFavorite);
+  }
 
   return (
     <div className="product-card">
@@ -73,6 +80,7 @@ const ProductCard = (props) => {
                 style={{ backgroundColor: "#fff", borderColor: "#C23532" }}
                 className="me-2 mb-2"
                 onClick={() => {
+                  handleFavoriteClick();
                   props.addToFavorite({
                     img: props.img,
                     nombre: props.nombre,
@@ -83,7 +91,7 @@ const ProductCard = (props) => {
                   });
                 }}
               >
-                <Icon path={mdiHeart} size={1} color="red" />
+                <Icon path={mdiHeart} size={1} color={isFavorite ? "red" : "pink"} />
               </Button>
             </div>
           ))}
