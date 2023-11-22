@@ -1,0 +1,44 @@
+.contenedor{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.imagen{
+    position: relative;
+    margin-left: 20%;
+    padding: 1rem;
+}
+
+.imagen img{
+    position: relative;
+    width: 100%;
+    height: 80%;
+    margin-top: 18%;
+    right: 30%;
+}
+
+.informacion{
+    position: relative;
+    margin-left: 15%;
+    margin-bottom: 10%;
+    display: block;
+    padding: 1rem;
+    right: 20%;
+}
+
+.detalles{
+    position: relative;
+    padding: 1rem;
+    border-bottom: 2px solid black;
+    margin-top: 55%;
+    width: 170%;
+}
+
+.precio{
+    padding-top: 2rem;
+}
+
+.descripcion{
+    padding-top: 2rem;
+}

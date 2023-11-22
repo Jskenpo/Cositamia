@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente HTML para Obtener Cliente por NIT</title>
+</head>
+<body>
+
+    <h1>Cliente HTML para Obtener Cliente por NIT</h1>
+
+    <form id="clienteForm">
+        <label for="nit">NIT:</label>
+        <input type="text" id="nit" name="nit" required>
+        <button type="button" onclick="realizarSolicitud()">Buscar Cliente</button>
+    </form>
+
+    <div id="resultado">
+        <!-- Aquí se mostrará el resultado de la solicitud fetch -->
+    </div>
+
+    <script>
+        function realizarSolicitud() {
+            const nit = document.getElementById('nit').value;
+
+            fetch(`http://localhost:3161/cliente/${nit}`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultadoDiv = document.getElementById('resultado');
+                    resultadoDiv.innerHTML = ''; // Limpiar contenido anterior
+
+                    if (data.length > 0) {
+                        // Mostrar la información del cliente en el resultadoDiv
+                        const cliente = data[0];
+                        resultadoDiv.innerHTML = `
+                            <p>ID del Cliente: ${cliente.id_cliente}</p>
+                            <p>Nombre del Cliente: ${cliente.nombre}</p>
+                        `;
+                    } else {
+                        resultadoDiv.innerHTML = '<p>No se encontró ningún cliente con ese NIT.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+
+</body>
+</html>
