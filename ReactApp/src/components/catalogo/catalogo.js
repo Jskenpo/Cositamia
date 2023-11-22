@@ -5,7 +5,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import './catalogo.css';
 
-function Catalogo({ addToCart }) {
+function Catalogo({ addToCart, addToFavorite }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [showCategories, setShowCategories] = useState({ ArreglosF: true, Globos: true, CanastaRegalos: true, CanastaF: true, Regalos: true });
@@ -49,8 +49,15 @@ function Catalogo({ addToCart }) {
     setSearchTerm(event.target.value);
   };
 
-  const handleShow = (breakpoint, product) => {
+  const handleShowCart = (breakpoint, product) => {
     addToCart(product);
+    setFullscreen(breakpoint);
+    setShow(true);
+    setSelectedProduct(product);
+  };
+
+  const handleShowFavorite = (breakpoint, product) => {
+    addToFavorite(product);
     setFullscreen(breakpoint);
     setShow(true);
     setSelectedProduct(product);
@@ -160,8 +167,11 @@ function Catalogo({ addToCart }) {
                   precio={'Q'+product.Precio+'.00'}
                   img={product.imagen}
                   sku={product.SKU}
+                  descripcion={product.Descripción}
                   addToCart={addToCart}
-                  handleShow={handleShow}
+                  addToFavorite={addToFavorite}
+                  handleShowCart={handleShowCart}
+                  handleShowFavorite={handleShowFavorite}
                 />
               </div>
             ))}
@@ -183,8 +193,11 @@ function Catalogo({ addToCart }) {
                   precio={'Q'+product.Precio+'.00'}
                   img={product.imagen}
                   sku={product.SKU}
+                  descripcion={product.Descripción}
                   addToCart={addToCart}
-                  handleShow={handleShow}
+                  addToFavorite={addToFavorite}
+                  handleShowCart={handleShowCart}
+                  handleShowFavorite={handleShowFavorite}
                 />
               </div>
             ))}
@@ -206,8 +219,11 @@ function Catalogo({ addToCart }) {
                   precio={'Q'+product.Precio+'.00'}
                   img={product.imagen}
                   sku={product.SKU}
+                  descripcion={product.Descripción}
                   addToCart={addToCart}
-                  handleShow={handleShow}
+                  addToFavorite={addToFavorite}
+                  handleShowCart={handleShowCart}
+                  handleShowFavorite={handleShowFavorite}
                 />
               </div>
             ))}
@@ -229,8 +245,11 @@ function Catalogo({ addToCart }) {
                   precio={'Q'+product.Precio+'.00'}
                   img={product.imagen}
                   sku={product.SKU}
+                  descripcion={product.Descripción}
                   addToCart={addToCart}
-                  handleShow={handleShow}
+                  addToFavorite={addToFavorite}
+                  handleShowCart={handleShowCart}
+                  handleShowFavorite={handleShowFavorite}
                 />
               </div>
             ))}
@@ -252,8 +271,11 @@ function Catalogo({ addToCart }) {
                   precio={'Q'+product.Precio+'.00'}
                   img={product.imagen}
                   sku={product.SKU}
+                  descripcion={product.Descripción}
                   addToCart={addToCart}
-                  handleShow={handleShow}
+                  addToFavorite={addToFavorite}
+                  handleShowCart={handleShowCart}
+                  handleShowFavorite={handleShowFavorite}
                 />
               </div>
             ))}
