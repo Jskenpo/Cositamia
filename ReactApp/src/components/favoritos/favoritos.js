@@ -11,9 +11,20 @@ function Favoritos({ favorite, setFavorite, addToCart }) {
     };
 
     const handleAddToCart = (product, index) => {
-        addToCart(product);
-        handleRemoveProduct(index);
-    };
+        console.log('Precio del producto:', product.precio);
+        const precioNumerico = +product.precio;
+        console.log('Precio convertido:', precioNumerico);
+    
+        if (!isNaN(precioNumerico)) {
+            addToCart({
+                ...product,
+                precio: precioNumerico,
+            });
+            handleRemoveProduct(index);
+        } else {
+            console.error('Error al convertir el precio a un número válido');
+        }
+    };    
 
     return (
         <div className="container">
