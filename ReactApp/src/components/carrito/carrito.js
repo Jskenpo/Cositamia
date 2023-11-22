@@ -7,9 +7,26 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Modal from 'react-bootstrap/Modal';
 import './carrito.css';
+import { useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 function Carrito({ cart, setCart }) {
     const navigate = useNavigate();
+    const form = useRef();
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        emailjs.sendForm('service_snlzr2o', 'template_d02f6t1', form.current, 'KACHmwLPcPokNHMTc')
+        .then((result) => {
+            console.log(result.text);
+            console.log("mensaje enviado");
+        }, (error) => {
+            console.log(error.text);
+        });
+
+        handleClose();
+    };
 
     const calculateCosts = () => {
         const subtotal = cart.reduce((total, item) => total + (parseFloat(item.precio) * item.cantidad), 0);
@@ -46,6 +63,7 @@ function Carrito({ cart, setCart }) {
         correo: "",
         cod_postal: ""
     });
+
 
 
     const handleClose = () => setShow(false);
@@ -212,6 +230,7 @@ function Carrito({ cart, setCart }) {
                 .catch(error => {
                     console.error('Error:', error);
                 });
+                
 
         } catch (error) {
             console.log(error);
@@ -299,13 +318,12 @@ function Carrito({ cart, setCart }) {
                         </div>
                         <div className="col-sm-12 col-md-6 text-right">
                             <button className="btn btn-lg btn-block btn-success text-uppercase" onClick={handleShow} style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}>Realizar pedido</button>
-
                             <Modal show={show} onHide={handleClose} animation={false}>
                                 <Modal.Header closeButton>
                                     <Modal.Title>Realizar Pedido</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
-                                    <Form>
+                                    <Form ref={form}>
                                         <Row className="mb-3">
                                             <Form.Group as={Col} controlId="formGridName">
                                                 <Form.Label>Nombre y apellido</Form.Label>
@@ -319,39 +337,60 @@ function Carrito({ cart, setCart }) {
                                                 <Form.Control type="email" name="correo" placeholder="Correo" onChange={handleInputChange} />
                                             </Form.Group>
 
-                                            <Form.Group as={Col} controlId="formGridPassword">
+                                            <Form.Group as={Col} controlId="formGridPhone">
                                                 <Form.Label>Teléfono</Form.Label>
                                                 <Form.Control type="tel" name="telefono" placeholder="Teléfono" onChange={handleInputChange} />
                                             </Form.Group>
                                         </Row>
 
-                                        <Form.Group className="mb-3" controlId="formGridAddress1">
+                                        <Form.Group className="mb-3" controlId="formGridNit">
                                             <Form.Label>NIT</Form.Label>
                                             <Form.Control type="text" name="nit" placeholder="NIT" onChange={handleInputChange} />
                                         </Form.Group>
 
-                                        <Form.Group className="mb-3" controlId="formGridAddress2">
+                                        <Form.Group className="mb-3" controlId="formGridAddress">
                                             <Form.Label>Dirección</Form.Label>
                                             <Form.Control type="text" name="direccion" placeholder="Calle, avenida, zona" onChange={handleInputChange} />
                                         </Form.Group>
 
                                         <Row className="mb-3">
-                                            <Form.Group as={Col} controlId="formGridZip">
+                                            <Form.Group as={Col} controlId="formGridPostalCode">
                                                 <Form.Label>Código postal</Form.Label>
                                                 <Form.Control type="text" name="cod_postal" onChange={handleInputChange} />
                                             </Form.Group>
                                         </Row>
+
+                                        {/* Actualización para los campos SKU, cantidad y precio */}
+                                        <div style={{ display: "none" }}>
+                                        {cart.map((item, index) => (
+                                            <div key={index}>
+                                                <Form.Group className="mb-3" controlId={`formGridSku_${index}`}>
+                                                    <Form.Label>SKU</Form.Label>
+                                                    <Form.Control type="text" name="sku" value={item.sku} readOnly />
+                                                </Form.Group>
+                                                <Form.Group className="mb-3" controlId={`formGridCantidad_${index}`}>
+                                                    <Form.Label>Cantidad</Form.Label>
+                                                    <Form.Control type="number" name="cantidad" value={item.cantidad} readOnly />
+                                                </Form.Group>
+                                                <Form.Group className="mb-3" controlId={`formGridPrecio_${index}`}>
+                                                    <Form.Label>Precio</Form.Label>
+                                                    <Form.Control type="text" name="precio" value={item.precio} readOnly />
+                                                </Form.Group>
+                                            </div>
+                                        ))}
+                                        </div>
                                     </Form>
                                 </Modal.Body>
                                 <Modal.Footer>
                                     <Button variant="secondary" onClick={handleClose} style={{ backgroundColor: '#E5948F', borderColor: '#E5948F' }}>
                                         Cancelar
                                     </Button>
-                                    <Button variant="primary" onClick={handleSubmit} style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}>
+                                    <Button variant="primary" onClick={sendEmail} style={{ backgroundColor: '#C23532', borderColor: '#C23532' }}>
                                         Realizar pedido
                                     </Button>
                                 </Modal.Footer>
                             </Modal>
+
                         </div>
                     </div>
                 </div>
