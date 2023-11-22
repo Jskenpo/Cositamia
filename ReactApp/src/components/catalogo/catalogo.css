@@ -4,8 +4,8 @@
 
 .icono {
   position: absolute;
-  top: 20%;
-  left: 4%;
+  top: 31%;
+  left: 5.5%;
   z-index: 1;
   color: black;
 }
@@ -15,7 +15,9 @@
   width: 420px;
   height: 40px;
   border-radius: 50px;
-  background-color: #adb5bd;
+  background-color: #fff;
+  border-radius: 35px;
+  border: 2px solid #000;  
   margin-top: 45px;
   margin-left: 0px;
 }
@@ -28,7 +30,7 @@
   width: 360px;
   height: 20px;
   outline: none;
-  background-color: #adb5bd;
+  background-color: #fff;
   border-color: transparent;
   transition: border-bottom 1s;
 }
@@ -41,7 +43,7 @@
   border: none;
   border-bottom: 0.5px solid #6c757d;
   outline: none;
-  background-color: #adb5bd;
+  background-color: #fff;
   color: black;
 }
 
@@ -50,7 +52,7 @@
   width: 150px;
   height: 40px;
   border-radius: 50px;
-  background-color: #adb5bd;
+  background-color: #fff;
   margin-top: 45px;
   margin-left: 10px;
   display: flex;
@@ -59,25 +61,59 @@
   text-align: center;
 }
 
+.filtros button{
+  background-color: transparent;
+  border-radius: 35px;
+  border: 2px solid #000;
+  width: 100%;
+}
+
 .iconoF {
   order: -1;
   margin-right: 5px;
 }
 
-
-.Vestidos {
+.ArreglosF {
   position: relative;
   top: 1rem;
 }
 
-.Accesorios {
+.Globos {
+  position: relative;
+  top: 3rem;
+}
+
+.CanastaRegalos {
+  position: relative;
+  top: 3rem;
+}
+
+.CanastaF {
+  position: relative;
+  top: 3rem;
+}
+
+.Regalos {
   position: relative;
   top: 3rem;
 }
 
 .product-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem;
+}
+
+.container h1{
+  margin-top: 2rem;
+  text-align: center;
+  color: #C23532;
+}
+
+.filters-container h2{
+  color: #C23532;
+}
+
+.product-container{
+  margin-top: 2rem;
 }

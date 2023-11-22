@@ -1,18 +1,58 @@
-#navbarNavAltMarkup{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+#navbarNavAltMarkup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  z-index: 999; /* Para asegurarte de que esté en la parte superior de la pila. */
 }
 
-#containerNavBar{
-    background-color: black;
+#containerNavBar {
+  margin-left: 0;
+  margin-right: 0;
 }
 
-#margenes{
-    margin-left: 20px;
-    margin-right: 20px;
+#margins {
+  margin-top: 145px;
+  background: #C23532;
+  backdrop-filter: blur(5px);
+  border-bottom: none; /* Cambiado de #ffff a none para eliminar el borde */
 }
 
-#miNavBar{
-    background-color: black !important;
+.logo {
+  margin: auto;
+  width: 600px;
+  height: 220px;
+}
+
+.navbar-brand {
+  position: absolute;
+  top: -5%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-nav:first-child {
+  padding-left: 12px;
+}
+
+.nav-link {
+  color: #ffff !important;
+  font-family: 'Helvetica';
+  font-size: 18px !important;
+  font-weight: bold !important;
+  margin-top: 1.5%;
+}
+
+.vertical-line {
+  margin: 0 auto;
+  width: 15px;
 }

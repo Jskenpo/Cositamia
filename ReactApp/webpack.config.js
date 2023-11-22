@@ -33,6 +33,18 @@ module.exports = {
         }
       },
       {
+        test: /\.(mp4|mp3)(\?.*)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'media/'
+            },
+          },
+        ],
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {

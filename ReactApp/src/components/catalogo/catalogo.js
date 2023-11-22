@@ -1,47 +1,87 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductCard from '../productCard/productCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import './catalogo.css';
 
-import producto1 from '../../assets/imas/Producto1.jpg';
-import producto2 from '../../assets/imas/Producto2.jpg';
-import producto3 from '../../assets/imas/Producto3.jpg';
-import producto4 from '../../assets/imas/Producto4.jpg';
-import producto5 from '../../assets/imas/Producto5.jpg';
-import producto6 from '../../assets/imas/Producto6.jpg';
-import producto7 from '../../assets/imas/Producto7.jpg';
-import producto8 from '../../assets/imas/Producto8.jpg';
-import producto9 from '../../assets/imas/Producto9.jpg';
-import producto10 from '../../assets/imas/Producto10.jpg';
-
-function Catalogo() {
+function Catalogo({ addToCart, addToFavorite }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
+  const [showCategories, setShowCategories] = useState({ ArreglosF: true, Globos: true, CanastaRegalos: true, CanastaF: true, Regalos: true });
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const categoriesResponse = await fetch('http://localhost:3161/categorias');
+      const categories = await categoriesResponse.json();
+      const allProducts = {};
+  
+      for (const category of categories) {
+        const productsResponse = await fetch(`http://localhost:3161/arreglos/${category.id_categoria}`);
+        const products = await productsResponse.json();
+  
+        // Fetch images from FileServer_Flores
+        const imagesResponse = await fetch(`http://localhost:3070/arreglos/${category.id_categoria}`);
+        const images = await imagesResponse.json();
+  
+        // Combine products and images
+        const productsWithImages = products.map((product, index) => ({
+          ...product,
+          imagen: images[index]?.imagen ? `data:image/jpeg;base64,${images[index].imagen}` : null,
+        }));
+  
+        allProducts[category.id_categoria] = productsWithImages;
+      }
+  
+      setProducts(allProducts);
+      console.log('Products:', allProducts);
+    } catch (error) {
+      console.log("Error fetching products:", error);
+    }
+  };  
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredProductsVestidos = [
-    { img: producto1, nombre: 'Vestido Largo', precio: 'Q 300.00' },
-    { img: producto3, nombre: 'Vestido Cafe', precio: 'Q 500.00' },
-    { img: producto4, nombre: 'Vestido de Lona', precio: 'Q 400.00' },
-    { img: producto5, nombre: 'Pieza de vestido', precio: 'Q 700.00' },
-    { img: producto10, nombre: 'Vestido Negro', precio: 'Q 500.00' },
-  ].filter((product) =>
-    product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleShowCart = (breakpoint, product) => {
+    addToCart(product);
+    setFullscreen(breakpoint);
+    setShow(true);
+    setSelectedProduct(product);
+  };
 
-  const filteredProductsAccesorios = [
-    { img: producto2, nombre: 'Bolso Azul', precio: 'Q 250.00' },
-    { img: producto6, nombre: 'Collar de Estrella', precio: 'Q 300.00' },
-    { img: producto7, nombre: 'Bolso Blanco', precio: 'Q 250.00' },
-    { img: producto8, nombre: 'Bolso Amarillo', precio: 'Q 250.00' },
-    { img: producto9, nombre: 'Bolso de Lona', precio: 'Q 300.00' },
-  ].filter((product) =>
-    product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleShowFavorite = (breakpoint, product) => {
+    addToFavorite(product);
+    setFullscreen(breakpoint);
+    setShow(true);
+    setSelectedProduct(product);
+  };
+
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+  };
+
+  const toggleCategory = (category) => {
+    setShowCategories((prevCategories) => ({
+      ...prevCategories,
+      [category]: !prevCategories[category],
+    }));
+  };
+
+  const filterProducts = (categoryId) => {
+    const categoryProducts = products[categoryId];
+    if (categoryProducts) {
+      // Itera sobre las claves del objeto y accede a los productos
+      return Object.keys(categoryProducts).map((key) => categoryProducts[key]);
+    }
+    return [];
+  };
 
   return (
     <div className="container">
@@ -59,32 +99,190 @@ function Catalogo() {
           />
         </div>
         <div className="filtros">
-          Filtros
-          <div className="iconoF">
-            <FontAwesomeIcon icon={faFilter} />
+          <button onClick={toggleFilters}><FontAwesomeIcon icon={faFilter} />Filtros</button>
+        </div>
+      </div>
+
+      {showFilters && (
+        <div className="filters-container">
+          <h2 style={{ marginTop: '1rem' }}>Categorías</h2>
+          <label>
+            <input
+              type="checkbox"
+              checked={showCategories.ArreglosF}
+              onChange={() => toggleCategory('ArreglosF')}
+            />
+            Arreglos Florales
+          </label>
+          <br></br>
+          <label>
+            <input
+              type="checkbox"
+              checked={showCategories.Globos}
+              onChange={() => toggleCategory('Globos')}
+            />
+            Globos
+          </label>
+          <br></br>
+          <label>
+            <input
+              type="checkbox"
+              checked={showCategories.CanastaRegalos}
+              onChange={() => toggleCategory('CanastaRegalos')}
+            />
+            Canastas de Regalos
+          </label>
+          <br></br>
+          <label>
+            <input
+              type="checkbox"
+              checked={showCategories.CanastaF}
+              onChange={() => toggleCategory('CanastaF')}
+            />
+            Canastas de Flores
+          </label>
+          <br></br>
+          <label>
+            <input
+              type="checkbox"
+              checked={showCategories.Regalos}
+              onChange={() => toggleCategory('Regalos')}
+            />
+            Regalos
+          </label>
+        </div>
+      )}
+
+      <div className="ArreglosF">
+        {showCategories.ArreglosF && (
+          <h1>Arreglos de Flores</h1>
+        )}
+        {showCategories.ArreglosF && (
+          console.log(products[1]),
+          <div className="product-container">
+            {filterProducts(1).map((product, index) => (
+              <div className={`product${index + 1}`} key={index}>
+                <ProductCard
+                  nombre={product["Nombre del Arreglo"]}
+                  precio={'Q'+product.Precio+'.00'}
+                  img={product.imagen}
+                  sku={product.SKU}
+                  descripcion={product.Descripción}
+                  addToCart={addToCart}
+                  addToFavorite={addToFavorite}
+                  handleShowCart={handleShowCart}
+                  handleShowFavorite={handleShowFavorite}
+                />
+              </div>
+            ))}
           </div>
-        </div>
+        )}
       </div>
-      <div className="Vestidos">
-        <h1>Vestidos</h1>
-        <div className="product-container">
-          {filteredProductsVestidos.map((product, index) => (
-            <div className={`product${index + 1}`} key={index}>
-              <ProductCard img={product.img} nombre={product.nombre} precio={product.precio} />
-            </div>
-          ))}
-        </div>
+
+      <div className="Globos">
+        {showCategories.Globos && (
+          <h1>Globos</h1>
+        )}
+        {showCategories.Globos && (
+          console.log(products[2]),
+          <div className="product-container">
+            {filterProducts(2).map((product, index) => (
+              <div className={`product${index + 1}`} key={index}>
+                <ProductCard
+                  nombre={product["Nombre del Arreglo"]}
+                  precio={'Q'+product.Precio+'.00'}
+                  img={product.imagen}
+                  sku={product.SKU}
+                  descripcion={product.Descripción}
+                  addToCart={addToCart}
+                  addToFavorite={addToFavorite}
+                  handleShowCart={handleShowCart}
+                  handleShowFavorite={handleShowFavorite}
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-      <div className="Accesorios">
-        <h1>Accesorios</h1>
-        <div className="product-container">
-          {filteredProductsAccesorios.map((product, index) => (
-            <div className={`product${index + 1}`} key={index}>
-              <ProductCard img={product.img} nombre={product.nombre} precio={product.precio} />
-            </div>
-          ))}
-        </div>
+
+      <div className="CanastaRegalos">
+        {showCategories.CanastaRegalos && (
+          <h1>Canastas de Regalos</h1>
+        )}
+        {showCategories.CanastaRegalos && (
+          console.log(products[3]),
+          <div className="product-container">
+            {filterProducts(3).map((product, index) => (
+              <div className={`product${index + 1}`} key={index}>
+                <ProductCard
+                  nombre={product["Nombre del Arreglo"]}
+                  precio={'Q'+product.Precio+'.00'}
+                  img={product.imagen}
+                  sku={product.SKU}
+                  descripcion={product.Descripción}
+                  addToCart={addToCart}
+                  addToFavorite={addToFavorite}
+                  handleShowCart={handleShowCart}
+                  handleShowFavorite={handleShowFavorite}
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
+
+      <div className="CanastaF">
+        {showCategories.CanastaF && (
+          <h1>Canastas de Flores</h1>
+        )}
+        {showCategories.CanastaF && (
+          console.log(products[4]),
+          <div className="product-container">
+            {filterProducts(4).map((product, index) => (
+              <div className={`product${index + 1}`} key={index}>
+                <ProductCard
+                  nombre={product["Nombre del Arreglo"]}
+                  precio={'Q'+product.Precio+'.00'}
+                  img={product.imagen}
+                  sku={product.SKU}
+                  descripcion={product.Descripción}
+                  addToCart={addToCart}
+                  addToFavorite={addToFavorite}
+                  handleShowCart={handleShowCart}
+                  handleShowFavorite={handleShowFavorite}
+                />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="Regalos">
+        {showCategories.Regalos && (
+          <h1>Regalos</h1>
+        )}
+        {showCategories.Regalos && (
+          console.log(products[5]),
+          <div className="product-container">
+            {filterProducts(5).map((product, index) => (
+              <div className={`product${index + 1}`} key={index}>
+                <ProductCard
+                  nombre={product["Nombre del Arreglo"]}
+                  precio={'Q'+product.Precio+'.00'}
+                  img={product.imagen}
+                  sku={product.SKU}
+                  descripcion={product.Descripción}
+                  addToCart={addToCart}
+                  addToFavorite={addToFavorite}
+                  handleShowCart={handleShowCart}
+                  handleShowFavorite={handleShowFavorite}
+                />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
     </div>
   );
 }
